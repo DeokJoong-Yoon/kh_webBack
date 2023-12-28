@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<books>
+	<book>
+		<title>러셀의 교육론</title>
+		<author>버트런드 러셀</author>
+		<publisher>서광사</publisher>
+	</book>
+	<book>
+		<title>마키아벨리의 군주론</title>
+		<author>니콜로 마키아벨리</author>
+		<publisher>소울메이트</publisher>
+	</book>
+	<book>
+		<title>무의미의 축제</title>
+		<author>밀란 쿤데라</author>
+		<publisher>민음사</publisher>
+	</book>
+	<book>
+		<title>소유냐 존재냐</title>
+		<author>에리히프롬</author>
+		<publisher>까치</publisher>
+	</book>
+	<book>
+		<title>절대강자</title>
+		<author>이외수</author>
+		<publisher>해냄</publisher>
+	</book>
+</books>

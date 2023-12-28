@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+	<title>json - 09-comment.html</title>
+
+	<link rel="shortcut icon" href="../image/icon.png" />
+	<link rel="apple-touch-icon" href="../image/icon.png" />
+
+	<!-- 공통 css -->
+	<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../css/common.css" />
+
+	<!-- jQuery Framework 참조하기 -->
+	<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+	<!-- 사용자 스크립트 블록 -->
+	<script type="text/javascript">
+		$(function () {
+
+
+			$.ajax({
+				url: "/firstExample/ajax/comment/comment_list.json",
+				type: "get",
+				dataType: "json",
+				success: function (json) {
+					let user = json.users.user;
+
+					$.each(user, function () {
+						let name = this.name;
+						let date = this.date;
+						let comment = this.comment;
+
+						let ul = $('<ul>');
+						let li1 = $("<li>").html(name + " / " + date);
+						let button = $('<button type="button" class="remove">삭제하기</button>');
+						let li2 = $("<li>").html(comment);
+
+						ul.append(li1.append(button)).append(li2).append("<hr />");
+						$("#result").append(ul);
+						//$("#result").append("<hr />");
+					})
+
+				},
+				error: function (xhr, tesxtStatus, errorThrown) {
+					$("#result").html(textStatus + " ( HTTP - " + xhr.status + " / " + errorThrown + " ) ");
+				}
+			});
+
+			$(document).on("click", ".remove", function () {
+				if (confirm("정말 석택하신 항목을 삭제하시겠습니까?")) {
+					$(this).parent().parent().remove();
+				} else {
+					return;
+				}
+
+			});
+
+			$("#insertBtn").on("click", function () {
+				let name = $("#user_name").val();
+				if (name.replace(/\s/g, "") == "") {
+					alert("작성자를 입력해주세요.")
+					return;
+				}
+				const now = new Date();
+				//"2023-12-28 10:21:42",
+				let date = now.getFullYear() + "-" + now.getMonth() + "-" + now.getDate() + "-" + now.getHours() + "-" + now.getMinutes();
+				let comment = $("#comment").val();
+
+				let ul = $('<ul>');
+				let li1 = $("<li>").html(name + " / " + date);
+				let button = $('<button type="button" class="remove">삭제하기</button>');
+				let li2 = $("<li>").html(comment);
+
+				ul.append(li1.append(button)).append(li2).append("<hr />");
+				$("#result").append(ul);
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<h1 class="title">jQuery Comment</h1>
+	<form id="comment_form">
+		<div>
+			<label>작성자</label><input type="text" id="user_name" /><button type="button" id="insertBtn">저장하기</button>
+		</div>
+		<div>
+			<label>댓글 내용</label><textarea cols="80" style="resize: none;" id="comment"></textarea>
+		</div>
+	</form>
+	<hr />
+	<div class="result" id="result"></div>
+</body>
+
+</html>

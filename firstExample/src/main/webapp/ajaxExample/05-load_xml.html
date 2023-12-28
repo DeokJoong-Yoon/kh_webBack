@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+	<title>xml - 05-load_xml.html</title>
+
+	<link rel="shortcut icon" href="../image/icon.png" />
+	<link rel="apple-touch-icon" href="../image/icon.png" />
+
+	<!-- 공통 css -->
+	<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../css/common.css" />
+
+	<!-- jQuery Framework 참조하기 -->
+	<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+	<!-- 사용자 스크립트 블록 -->
+	<script type="text/javascript">
+		$(function () {
+			/* ajax() 함수로 접근 */
+			/*$.ajax({
+				url: "/firstExample/ajax/xml/book.xml",
+				type: "get",
+				dataType: "xml",
+				timeout: 30000,
+				cache: false,
+				success: function (data) {
+					//반복되는 태그 단위를 찾아서 each() 함수 사용
+					$(data).find("book").each(function () {
+						console.log($(this).index());
+						//각 개별 요소에 속해 있는 텍스트 데이터 추출
+						let no = $(this).index() + 1;
+						let title = $(this).find("title").text();
+						let author = $(this).find("author").text();
+						let publisher = $(this).find("publisher").text();
+
+						let txt = $("<li>").html(no + " - " + title + ", " + author + ", " + publisher);
+						$('#view').append(txt);
+						// 반드시 body 태그 휘에 정적 요소에 추가 작업 설정.
+					});
+				},
+				error: function (xhr, textStatus, errorThrown) {
+					$("#result").html(textStatus + " (HTTP - " + xhr.status + " / " + errorThrown + " ) ");
+				}
+			}); */
+			/*
+			get() 함수로 접근
+			$.get(요청할 url, 요청시 전달할 파라미터, 콜백함수) < - 정상적으로 호출 시 호출함수.fail(콜백함수) < - 실패시 호출 함수
+				   같은 서버에 위치하고 있는 데이터를 요청하기 때문에../ ajax / xml / book.xml 가능합니다. 
+				   하지만 다른 위치에서 접근시 경로가 달라져야 하기 때문에 uri 요청을 권장합니다
+			*/
+
+			$.get('/firstExample/ajax/xml/book.xml', function (data) {
+				$(data).find('book').each(function () {
+					let title = $(this).find("title").text();
+					let author = $(this).find("author").text();
+					let publisher = $(this).find("publisher").text();
+
+					let txt = $("<li>").html(title + ", " + author + ", " + publisher);
+					$('#view').append(txt);
+				});
+			}).fail(function (xhr, status, error) {
+				$("#result").html("오류가 발생했습니다.<br />").append("오류명: " + xhr.statusText + "<br />").append("상태: " + status);
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+	<h1 class="title">$.ajax() 함수를 사용한 xml 읽기</h1>
+	<div class="console" id="result">
+		<ul id="view"></ul>
+	</div>
+</body>
+
+</html>

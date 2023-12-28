@@ -1,0 +1,31 @@
+{
+	"books": {
+		"book": [
+			{
+				"title": "러셀의 교육론",
+				"author": "버트런드 러셀",
+				"publisher": "서광사"
+			},
+			{
+				"title": "마키아벨리의 군주론",
+				"author": "니콜로 마키아벨리",
+				"publisher": "소울메이트"
+			},
+			{
+				"title": "무의미의 축제",
+				"author": "밀란 쿤데라",
+				"publisher": "민음사"
+			},
+			{
+				"title": "소유냐 존재냐",
+				"author": "에리히프롬",
+				"publisher": "까치"
+			},
+			{
+				"title": "절대강자",
+				"author": "이외수",
+				"publisher": "해냄"
+			}
+		]
+	}
+}

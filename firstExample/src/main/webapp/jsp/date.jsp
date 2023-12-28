@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.Date, java.text.SimpleDateFormat" %>
 <%@ page import="example.Clock" %>
+
 <!DOCTYPE html>
 <html>
 	<head>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+	<title>xml - 04-xml.html</title>
+
+	<link rel="shortcut icon" href="../image/icon.png" />
+	<link rel="apple-touch-icon" href="../image/icon.png" />
+
+	<!-- 공통 css -->
+	<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../css/common.css" />
+
+	<!-- jQuery Framework 참조하기 -->
+	<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+	<!-- 사용자 스크립트 블록 -->
+	<script type="text/javascript">
+		$(function () {
+			// 버튼의 클릭 이벤트
+			$("#mybtn").on("click", function () {
+				$("#result").html("");
+				$.ajax({
+					url: "/firstExample/ajax/xml/04.xml",
+					type: "get",
+					dataType: "xml",
+					timeout: 30000,
+					cache: false,
+					success: function (data) {
+						//반복되는 태그 단위를 찾아서 each() 함수 사용
+						$(data).find("subject").each(function () {
+							//각 개별 요소에 속해 있는 텍스트 데이터 추출
+							let title = $(this).find("title").text();
+							let time = $(this).find("time").text();
+							let teacher = $(this).find("teacher").text();
+
+							// 출력을 위한 동적 요소의 생성
+							let div = $("<div>");
+							let p1 = $("<p>").html(title);
+							let p2 = $("<p>").html(time);
+							let p3 = $("<p>").html(teacher);
+
+							div.append(p1).append(p2).append(p3);
+
+							// 반드시 body 태그 휘에 정적 요소에 추가 작업 설정.
+							$("#result").append(div);
+							$("#result").append("<hr />");
+						});
+					},
+					error: function (xhr, textStatus, errorThrown) {
+						$("#result").html(textStatus + " (HTTP - " + xhr.status + " / " + errorThrown + " ) ");
+					}
+				});
+			});
+		});
+	</script>
+
+</head>
+
+<body>
+	<h1 class="title">$.ajax() 함수를 사용한 텍스트 읽기</h1>
+	<div class="exec">
+		<input type="button" value="xml 데이터 가져오기" id="mybtn" />
+	</div>
+	<div class="console" id="result"></div>
+
+</body>
+
+</html>
