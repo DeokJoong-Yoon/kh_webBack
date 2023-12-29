@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+	<title>getData.html</title>
+
+	<link rel="shortcut icon" href="../image/icon.png" />
+	<link rel="apple-touch-icon" href="../image/icon.png" />
+
+	<!-- 공통 css -->
+	<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+	<link rel="stylesheet" type="text/css" href="../css/common.css" />
+
+</head>
+
+<body>
+	<!-- 
+		<form id="dataForm" method="post" action="/servletExample/getData">
+			<label>이 름 : </label>
+			<input type="text" name="name" id="name" placeholder="이름" required="required" /><br />
+			<label>주 소 : </label>
+			<input type="text" name="address" id="address" placeholder="주소" required="required"/><br />
+			<input type="submit" value="전송">&nbsp;&nbsp; 
+			<input type="reset" value="취소">
+		</form> -->
+
+	<form name="dataForm" id="dataForm">
+		<label>이 름 : </label>
+		<input type="text" name="name" id="name" placeholder="이름 입력" /><br />
+		<label>주 소 : </label>
+		<input type="text" name="address" id="address" placeholder="주소 입력" /><br />
+
+		<input type="button" value="전송">&nbsp;&nbsp;
+		<input type="reset" value="취소">
+	</form>
+
+	<script src="../js/jquery-3.7.1.js"></script>
+	<script src="../js/getData.js"></script>
+</body>
+
+</html>

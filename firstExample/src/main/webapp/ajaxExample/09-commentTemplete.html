@@ -25,21 +25,28 @@
 				<div>
 					<label for="user_name">작성자</label>
 					<input type="text" name="user_name" id="user_name" />
-					<input type="submit" value="저장하기" />
+					<button type="button" id="sendBtn">저장하기</button>
 				</div>
 				<div>
-					<label for="comment">댓글 내용</label>
+					<label for="comment">덧글 내용</label>
 					<textarea name="comment" id="comment"></textarea>
 				</div>
 			</form>
 		</div>
+
 		<ul id="comment_list">
-			<!-- 여기에 동적 생성 요소가 들어가게 됩니다. -->
+			<li id="item-template" class="comment_item">
+				<p class="writer">
+					<span class="item-name"></span>
+					<span class="item-date"></span>
+					<button type="button" class="delete_btn">삭제하기</button>
+				</p>
+				<p class="item-content"></p>
+			</li>
 		</ul>
 	</div>
-	<!-- jQuery Framework 참조하기 -->
 	<script src="../js/jquery-3.7.1.js"></script>
-	<script src="../js/comment.js"></script>
+	<script src="../js/commentTemplete.js"></script>
 </body>
 
 </html>

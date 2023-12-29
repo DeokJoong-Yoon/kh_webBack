@@ -1,0 +1,66 @@
+@charset "UTF-8";
+* {
+	color: #333;
+}
+ul {
+	list-style: none;
+}
+
+/* 페이지 제목을 표현.*/
+h1{
+	font-size: large;
+	border-left: 10px solid #7BAEB5;
+	border-bottom: 1px solid #7BAEB5;
+	padding: 10px;
+	width: auto;
+	background-color: #fff;
+}
+#item-template{
+	display:none; /*원본 li는 화면에 숨기기 위해 설정. */
+}
+
+#comment_write {
+	padding: 20px 15px;
+	border-bottom: 1px solid #7BAEB5;
+}
+#comment_write label {
+	display: inline-block;   /* 인라인 요소에 너비를 설정해 주기 위해서 설정 */ 
+	width: 80px;             
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+#comment_write input[type='text'], #comment_write textarea {
+	border: 1px solid #ccc;
+	vertical-align: middle;
+	padding: 3px 10px;
+	font-size: 12px;
+	line-height: 150%;
+}
+#comment_write textarea {
+	width: 380px;
+	height: 90px;
+	resize: none; /* textarea 크기 변경 불가 */
+}
+/* li 태그 적용 */
+.comment_item { 
+	font-size: 13px; color: #333;
+	padding: 15px;
+	border-bottom: 1px dotted #ccc;
+	line-height: 150%;
+}
+ /* 이름과 날짜의 부모요소 p 태그 적용 */
+.comment_item .writer {
+	color: #555;
+	line-height: 200%;
+}
+/* p 태그의 이름 span 태그 적용 */
+.comment_item .writer .name { 
+	color: #222;
+	font-weight: bold;
+	font-size: 14px;
+}
+/* 버튼 태그 적용 */
+.comment_item .writer input { 
+	vertical-align: middle;
+}
