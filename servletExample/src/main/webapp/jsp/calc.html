@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+	<title>간단한 연산 프로그래밍 - calc.html</title>
+
+	<link rel="shortcut icon" href="../image/icon.png" />
+	<link rel="apple-touch-icon" href="../image/icon.png" />
+</head>
+
+<body>
+	<p> [코딩시 참고사항]<br />
+		calc.html --> 요청 url: /servletExample/calcServlet<br />
+		method : post방식
+		각각 입력 양식의 이름 및 아이디(순서대로) : frm(폼태그), num1(숫자1), operator(select), num2(숫자2)<br />
+		각 텍스트 필드의 값은 반드시 숫자만 입력되도록 유효성 체크<br />
+		서블릿 name : CalcServlet 생성<br />
+		서블릿 내 요구사항 : +, -, *, / 연산의 결과를 반환하는 메서드(calc) 생성.</p>
+
+	<h3>계산기</h3>
+	<hr />
+	<!-- 서블릿 버전 계산기 실행을 위해 계산 버튼 클릭시 서블릿 호출  -->
+	<!-- 
+			<form name="frm" id="frm" action="/servletExample/calcServlet" method="post"> 
+				...
+				<input type="submit" value="전송" />
+			</form>
+		-->
+	<form name="frm" id="frm">
+		<input type="text" name="num1" id="num1" class="number" />
+		<select name="operator" id="operator">
+			<option value="+" selected>+</option>
+			<option value="-">-</option>
+			<option value="*">*</option>
+			<option value="/">/</option>
+		</select>
+		<input type="text" name="num2" id="num2" class="number" />
+		<label> = </label>
+		<input type="text" name="result" id="result" readonly="readonly" />
+		<input type="button" value="계산하기" id="btnCalc" />
+		<input type="reset" value="다시입력" />
+	</form>
+
+	<script src="../js/jquery-3.7.1.js"></script>
+	<script src="../js/calc.js"></script>
+</body>
+
+</html>
