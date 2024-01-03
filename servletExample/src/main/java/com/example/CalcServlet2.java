@@ -36,7 +36,7 @@ public class CalcServlet2 extends HttpServlet {
 		int result;
 		String op;
 
-		response.setContentType("tesxt/plain; charset=UTF-8");
+		response.setContentType("text/plain; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 
 		num1 = Integer.parseInt(request.getParameter("num1"));
