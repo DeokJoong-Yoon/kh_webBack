@@ -1,0 +1,9 @@
+$(function(){
+	$("#btnInfo").click(function(){ 
+		$("#dataForm").attr({
+			"method":"post",
+			"action":"request1.jsp"
+		});
+		$("#dataForm").submit();
+	});
+});

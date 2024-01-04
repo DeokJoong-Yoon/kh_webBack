@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+	<title>점수 입력 - score.html</title>
+</head>
+
+<body>
+	<form id="scoreForm">
+		<p>점수 입력(0 ~ 100사이로 입력해 주세요.</p>
+		<label>점수 : </label><input type="text" name="score" id="score" maxlength="3" />
+		<input type="button" id="sendBtn" value="학점 구하기" /><br />
+		<label>학점 : </label>
+		<input type="text" name="result" id="result" readonly="readonly" />
+	</form>
+
+	<script src="/scriptTag/js/jquery-3.7.1.js"></script>
+	<script src="/scriptTag/js/common.js"></script>
+	<script src="/scriptTag/js/score.js"></script>
+</body>
+
+</html>
