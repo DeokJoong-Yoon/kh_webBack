@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+	<title>add.html</title>
+
+	<link rel="shortcut icon" href="/servletExample/image/icon.png" />
+	<link rel="apple-touch-icon" href="/servletExample/image/icon.png" />
+	<script src="../js/jquery-3.7.1.js"></script>
+	<script src="../js/add.js"></script>
+	<script>
+		$(function () {
+			$("#calc").click(function () {
+				if($("#number").val().replace(/\s/g, "") == "") {
+					alert("숫자를 입력해주세요.");
+					return;
+				}
+				$("#form").attr({
+					"method": "get",
+					"action": "add.jsp"
+				});
+				$("#form").submit();
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<form name="form" id="form">
+		<h3>숫자를 입력하세요</h3>
+		<div>
+			1부터
+			<input type="text" name="number" id="number" />
+			<input type="button" name="calc" id="calc" value="계산하기" />
+		</div>
+	</form>
+
+
+</body>
+
+</html>
