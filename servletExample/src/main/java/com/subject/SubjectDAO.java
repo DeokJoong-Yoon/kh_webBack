@@ -91,4 +91,141 @@ public class SubjectDAO {
 		}
 		return subjectNumber;
 	}
+
+	public boolean subjectInsert(SubjectVO vo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		boolean success = false;
+		StringBuffer sql = new StringBuffer();
+		sql.append("insert into subject(no, s_num, s_name) ");
+		sql.append("values (subject_seq.nextval, ?, ?)");
+
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, vo.getS_num());
+			pstmt.setString(2, vo.getS_name());
+			int result = pstmt.executeUpdate();
+			if (result == 1) {
+				success = true;
+				// commit(con); // 자동 커밋 해제 시 개발자가 직접 명시
+			}
+		} catch (SQLException se) {
+			System.out.println("입력에 문제가 있어 잠시 후에 다시 진행해 주세요.");
+			// rollback(con);
+			// se.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("error = [ " + e + " ]");
+			// rollback(con);
+		} finally {
+			close(pstmt);
+			close(con);
+		}
+		return success;
+	}
+
+	public boolean subjectUpdate(SubjectVO svo) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("update subject set s_name = ? ");
+		sql.append("where no = ? ");
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		boolean success = false;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, svo.getS_name());
+			pstmt.setInt(2, svo.getNo());
+
+			int i = pstmt.executeUpdate();
+			if (i == 1) {
+				success = true;
+				// commit(con);
+			}
+		} catch (SQLException se) {
+			System.out.println("수정에 문제가 있어 잠시 후에 다시 진행해 주세요.");
+			// rollback(con);
+			// se.printStackTrace(); // 디버깅용
+		} catch (Exception e) {
+			System.out.println("error = [ " + e + " ] ");
+			// rollback(con);
+		} finally {
+			close(pstmt);
+			close(con);
+		}
+		return success;
+	}
+
+	public boolean subjectDelete(SubjectVO vo) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("delete from subject where no = ?");
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		boolean success = false;
+
+		try {
+			con = getConnection();
+
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, vo.getNo());
+
+			int i = 0;
+			i = pstmt.executeUpdate();
+			if (i == 1) {
+				success = true;
+				// commit(con);
+			}
+
+		} catch (SQLException se) {
+			System.out.println("삭제에 문제가 있어 잠시 후에 다시 진행해 주세요.");
+			// rollback(con);
+			se.printStackTrace(); // 디버깅용
+		} catch (Exception e) {
+			System.out.println("error = [ " + e + " ] ");
+			// rollback(con);
+		} finally {
+			close(pstmt);
+			close(con);
+		}
+		return success;
+	}
+
+	/*
+	 * studentDataCheck() 메서드 : 학과에 소속된 학생이 있는지 확인
+	 * @return int 자료형 리턴
+	 * */
+	
+	public int studentDataCheck(SubjectVO svo) {
+		StringBuffer sql = new StringBuffer();
+		sql.append("select count(sd_num) from student ");
+		sql.append("where s_num = ?");
+
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int data = 0;
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setString(1, svo.getS_num());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				data = rs.getInt(1);
+			}
+		} catch (SQLException se) {
+			System.out.println("조회에 문제가 있어 잠시 후에 다시 진행해 주세요.");
+			// rollback(con);
+			se.printStackTrace(); // 디버깅용
+		} catch (Exception e) {
+			System.out.println("error = [ " + e + " ] ");
+			// rollback(con);
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(con);
+		}
+		return data;
+	}
 }
