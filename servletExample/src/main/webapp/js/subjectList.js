@@ -46,7 +46,7 @@ $(function() {
 	
 	// "수정완료" 버튼 제어
 	$(document).on("click", ".upBtn", () => {
-		if(!chkData("#s_name", "학과명을 ")) return;
+		if(!chkData("#s_name", "수정할 학과명을 ")) return;
 		else {
 			$("#subject").attr({
 				"method" : "post",
@@ -80,5 +80,29 @@ $(function() {
 				alert(textStatus + " (HTTP - " + xhr.status + " ) ");
 			}
 		});
+	});
+	/*
+	$(".deleteBtn").on("click", function() {
+		if(confirm("삭제하시겠습니까?")) {
+			let no = $(this).paretns("tr").attr("data-no");
+			location.href="/servletExample/delete?no=" + no;
+		}
+	});*/
+	
+	// "학과명 검색" 버튼 제어
+	$("#searchBtn").on("click", () => {
+		if(!chkData("#ss_name", "검색할 학과명을 ")) return;
+		else {
+			$("#search").attr({
+				"method" : "get",
+				"action" : "/servletExample/list"
+			});
+			$("#search").submit();
+		}
+	});
+	
+	// "전체 검색" 버튼 제어
+	$("#searchAllBtn").on("click", ()=>{
+		location.href = "/servletExample/list";
 	});
 });

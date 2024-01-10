@@ -5,6 +5,11 @@
    @SuppressWarnings("unchecked")
    ArrayList<SubjectVO> list = (ArrayList<SubjectVO>)request.getAttribute("list");
    int counter = list.size();
+   
+   String word = request.getParameter("s_name");
+   if(word == null) {
+	   word = "";
+   }
 %>
 <!DOCTYPE html>
 <html>
@@ -41,12 +46,22 @@
                   <!-- <div class="text-end">
                      <button type="button" id="subjectInsert">학과정보등록</button>
                   </div> -->
+                  
+                  <form id="search">
+                  	<div class="input-group">
+                  		<input type="text" class="form-control" name="ss_name" id="ss_name" placeholder="학과명 입력" />
+                  		<button class="btn btn-outline-secondary" type="button" id="searchBtn">학과명 검색</button>
+                  		<button class="btn btn-outline-secondary" type="button" id="searchAllBtn">전체 검색</button>
+                  	</div>
+                  </form>
+                  
                   <table class="table table-striped">
                      <thead>
                         <tr class="text-center">
                            <th>번호</th>
                            <th>학과번호</th>
                            <th>학과명</th>
+                           <th>삭제여부</th>
                            <th>수정</th>
                            <th>삭제</th>
                         </tr>
@@ -61,9 +76,12 @@
                               <td><%= sub.getNo() %></td>
                               <td><%= sub.getS_num() %></td>
                               <td><%= sub.getS_name() %></td>
+                              <td><%= sub.getDeleteable() %></td>
                               <td><button type="button" class="updateBtn btn btn-outline-success btn-sm">수정</button>
-                              <td><button type="button" class="deleteBtn btn btn-outline-success btn-sm">삭제</button>
-                           </tr>         <!-- 수정에 대한 버튼제어 updateBtn -->
+                              <!-- <td><button type="button" class="deleteBtn btn btn-outline-success btn-sm">삭제</button> -->
+                              <td><button type="button" class="deleteBtn btn btn-outline-success btn-sm" 
+                              <% if(sub.getDeleteable().equals("삭제불가능")) { %> disabled="disabled" <% } %>>삭제</button>
+                           </tr>  
                      <%
                          }
                         } else {
@@ -84,8 +102,14 @@
                   <jsp:include page="subjectForm.jsp" /> 
                </div> <!-- 액션태그를 이용해 subjectForm.jsp를 현재 문서에 삽입하는 법  -->
          </div>
-         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
        <script src="/servletExample/js/jquery-3.7.1.min.js"></script>
        <script src="/servletExample/js/subjectList.js"></script>
+       <script>
+       	let keyword = "<%=word%>";
+       	if(keyword != "") {
+       		$("#s_name").val(keyword);
+       	}
+       </script>
    </body>
 </html> 

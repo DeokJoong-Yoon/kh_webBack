@@ -1,8 +1,6 @@
-package com.jdbc;
+package com.subject;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,14 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.subject.SubjectDAO;
-import com.subject.SubjectVO;
-
 /**
- * Servlet implementation class SubjectServlet
+ * Servlet implementation class SubjectSearch
  */
-@WebServlet("/list")
-public class SubjectServlet extends HttpServlet {
+@WebServlet("/search")
+public class SubjectSearch extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -26,18 +21,19 @@ public class SubjectServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		SubjectVO vo = null;
-		String s_name = request.getParameter("ss_name");
-		if(s_name != null) {
-			vo = new SubjectVO();
-			vo.setS_name(s_name);
-		}
-		SubjectDAO dao = new SubjectDAO();
-		ArrayList<SubjectVO> list = dao.getSubjectTotal(vo);
+		request.setCharacterEncoding("UTF-8");
 
-		request.setAttribute("list", list);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("subject/subjectList.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("subject/subjectSearch.jsp");
 		dispatcher.forward(request, response);
-
 	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+
 }

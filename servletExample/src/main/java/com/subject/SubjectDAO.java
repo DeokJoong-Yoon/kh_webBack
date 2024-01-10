@@ -25,12 +25,20 @@ public class SubjectDAO {
 
 		StringBuffer sql = new StringBuffer();
 		// 학과 전보 조회
-		sql.append("select no, s_num, s_name from subject ");
-		sql.append(" order by no");
+		// sql.append("select no, s_num, s_name from subject ");
+		// sql.append(" order by no");
 
+		// 삭제여부 추가하여 조회(뷰 이용)
+		sql.append("select no, s_num, s_name, deleteable from subjectselect ");
+		if (vo != null) {
+			sql.append(" where s_name like ?");
+		}
 		try {
 			con = getConnection();
 			pstmt = con.prepareStatement(sql.toString());
+			if (vo != null) {
+				pstmt.setString(1,  "%" + vo.getS_name() + "%");
+			}
 			rs = pstmt.executeQuery();
 
 			// ResultSet의 결과에서 모든 행을 각각의 SubjectVO 객체에 저장
@@ -41,6 +49,8 @@ public class SubjectDAO {
 				svo.setNo(rs.getInt("no"));
 				svo.setS_num(rs.getString("s_num"));
 				svo.setS_name(rs.getString("s_name"));
+				// 뷰로 조회시 삭제여부 설정
+				svo.setDeleteable(rs.getString("deleteable"));
 
 				// ArrayList 객체에 원소로 추라
 				list.add(svo);
@@ -194,9 +204,10 @@ public class SubjectDAO {
 
 	/*
 	 * studentDataCheck() 메서드 : 학과에 소속된 학생이 있는지 확인
+	 * 
 	 * @return int 자료형 리턴
-	 * */
-	
+	 */
+
 	public int studentDataCheck(SubjectVO svo) {
 		StringBuffer sql = new StringBuffer();
 		sql.append("select count(sd_num) from student ");
@@ -227,5 +238,39 @@ public class SubjectDAO {
 			close(con);
 		}
 		return data;
+	}
+
+	public SubjectVO subjectSearch(SubjectVO vo) {
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		StringBuffer sql = new StringBuffer();
+		ResultSet rs = null;
+		SubjectVO svo = null;
+		sql.append("select no, s_num, s_name from subject ");
+		sql.append(" where no=? ");
+		try {
+			con = getConnection();
+			pstmt = con.prepareStatement(sql.toString());
+			pstmt.setInt(1, vo.getNo());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				svo = new SubjectVO();
+				svo.setNo(rs.getInt("no"));
+				svo.setS_num(rs.getString("s_num"));
+				svo.setS_name(rs.getString("s_name"));
+			}
+		} catch (SQLException se) {
+			System.out.println("입력에 문제가 있어 잠시 후에 다시 진행해 주세요.");
+			// rollback(con);
+			// se.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("error = [ " + e + " ]");
+			// rollback(con);
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(con);
+		}
+		return svo;
 	}
 }

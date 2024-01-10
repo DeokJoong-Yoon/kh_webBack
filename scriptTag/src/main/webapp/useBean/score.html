@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+		<title>Insert title here</title>
+      	
+		<link rel="shortcut icon" href="/servletExample/image/icon.png" />
+		<link rel="apple-touch-icon" href="/servletExample/image/icon.png" />
+		<script type="text/javascript" src="../js/jquery-3.7.1.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				$("button[type='button']").click(function() {
+					$("#form1").attr({
+						"method" : "post",
+						"action" : "scoretag.jsp"
+					});
+					$("#form1").submit();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h3>이름과 점수를 입력하세요</h3>
+		<form name="form1" id="form1">
+			<div>
+				<label>이름 : </label>
+				<input type="text" name="name" id="name" maxlength="5" placeholder="이름 입력" />
+			</div>
+			<div>
+				<label>점수 : </label>
+				<input type="text" name="point" id="point" maxlength="3" placeholder="점수 입력" />
+			</div>
+			<div>
+				<button type="button">입력완료</button>
+				<button type="reset">다시쓰기</button>
+			</div>
+		</form>
+		
+	</body>
+</html>
+
+

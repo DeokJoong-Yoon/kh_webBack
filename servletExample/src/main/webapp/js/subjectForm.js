@@ -14,7 +14,7 @@ $(function() {
 	
 	// "입력완료" 버튼 제어
 	$(document).on("click", "#insertBtn", ()=> {
-		if(!chkData("#s_name", "학과명을 ")) return;
+		if(!chkData("#s_name", "등록할 학과명을 ")) return;
 		else {
 			$("#subject").attr({
 				"method" : "post",
@@ -26,7 +26,7 @@ $(function() {
 	
 	// "수정완료" 버튼 제어
 	$(document).on("click", ".upBtn", ()=> {
-		if (!chkData("#s_name","학과명을 ")) return;
+		if (!chkData("#s_name","수정할 학과명을 ")) return;
 		else {
 			$("#subject").attr({
 				"method" : "post",
