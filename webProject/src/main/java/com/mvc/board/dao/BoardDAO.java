@@ -69,4 +69,38 @@ public class BoardDAO {
 		}
 		return list;
 	}// end selelct
+	
+	/***
+	 * boardInsert() 메서드 : 게시물 등록
+	 * @return int 리턴.
+	 */
+	public int boardInsert(BoardVO vo) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			conn = getConnection();
+			StringBuffer query = new StringBuffer();
+			query.append("insert into board( num, author, title, content, reproot, repstep, repindent, passwd )");
+			query.append("values ( board_seq.nextval , ?, ?, ?, board_seq.currval, 0,0, ? )");
+			
+			pstmt = conn.prepareStatement(query.toString());
+			pstmt.setString(1, vo.getAuthor());
+			pstmt.setString(2, vo.getTitle());
+			pstmt.setString(3, vo.getContent());
+			pstmt.setString(4, vo.getPasswd());
+			result = pstmt.executeUpdate();
+			
+			if (result == 1) {
+				//commit(conn);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			// rollback(conn);
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		return result;
+	}
 }

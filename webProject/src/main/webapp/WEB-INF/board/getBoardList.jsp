@@ -43,7 +43,7 @@
 		
 		<%-- =================== 글쓰기 버튼 출력 시작 =================== --%>
 		<div class="contentBtn text-end">
-			<button type="button" id="writeForm" class=btn btn-primary btn-sm">글쓰기</button>
+			<button type="button" id="writeForm" class="btn btn-primary btn-sm">글쓰기</button>
 		</div>
 	</div>
 	<script src="/include/js/getBoardList.js"></script>

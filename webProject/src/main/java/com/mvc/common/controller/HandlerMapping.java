@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.mvc.board.controller.GetBoardListController;
+import com.mvc.board.controller.InsertBoardController;
+import com.mvc.board.controller.InsertFormController;
 
 public class HandlerMapping {
 	private Map<String, Controller> mappings;
@@ -13,6 +15,8 @@ public class HandlerMapping {
 
 		/* 답변형 게시판 처리 */
 		mappings.put("/board/getBoardList.do", new GetBoardListController());
+		mappings.put("/board/insertForm.do", new InsertFormController());
+		mappings.put("/board/insertBoard.do", new InsertBoardController());
 	}
 
 	public Controller getController(String path) { // 게시판리스트일 경우 path="/board/getBoardList.do"
