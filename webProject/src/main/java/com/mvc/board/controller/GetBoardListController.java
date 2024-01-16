@@ -15,7 +15,7 @@ public class GetBoardListController implements Controller {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
 		BoardVO vo = null;
-		
+				
 		BoardService service = BoardServiceImpl.getInstance();
 		List<BoardVO> list = service.boardList(vo);
 		

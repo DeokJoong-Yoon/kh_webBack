@@ -48,4 +48,15 @@ public class BoardServiceImpl implements BoardService {
 		int result = mapper.boardInsert(vo);
 		return result;
 	}
+	
+	@Override
+	public BoardVO boardDetail(BoardVO boardVO) {
+		BoardVO vo = mapper.boardDetail(boardVO);
+		return vo;
+	}
+
+	@Override
+	public void readcntUpdate(BoardVO vo) {
+		mapper.readcntUpdate(vo);
+	}
 }

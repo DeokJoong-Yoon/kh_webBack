@@ -23,13 +23,14 @@ public class SqlSessionTemplate {
 		try {
 			Reader reader = Resources.getResourceAsReader(resource);
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-			// openSessino 매개변수의 값으로 자동 커밋 여부를 지정.
+			// openSession 매개변수의 값으로 자동 커밋 여부를 지정.
 			session = sqlSessionFactory.openSession(true);
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		
+		
 		return session;
 	}
 }

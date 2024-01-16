@@ -5,6 +5,10 @@
 <body>
 	<div class="container">
 		<div class="text-center"><h3>게시판 리스트</h3></div>
+		<%-- post 방식으로 전송 시 반드시 form 태그 추가해 주어야 합니다. --%>
+		<form name="detailForm" id="detailForm">
+			<input type="hidden" name="num" id="num" />
+		</form>
 		
 		<%-- =================== 리스트 시작 =================== --%>
 		<div id="boardList">

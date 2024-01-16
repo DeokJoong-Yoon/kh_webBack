@@ -3,7 +3,7 @@
 <mapper namespace="com.mvc.board.dao.BoardMapper">
 
 	<!-- 게시물 기본 조회 -->
-	<select id="boardList" resultType="board">
+	<select id="boardList" parameterType="board" resultType="board">
 		<!-- Board - boardList -->
 		SELECT num, author, title, readcnt,
 			   to_char(writeday, 'YYYY-MM-DD') writeday,
@@ -16,11 +16,25 @@
 	<insert id="boardInsert" parameterType="board">
 	
 		<selectKey keyProperty="num" resultType="int" order="BEFORE">
-		select board_seq.nextval from dual
+			select board_seq.nextval from dual
 		</selectKey>
 		
 		INSERT INTO board(num, title, author, content, repRoot, repStep, repIndent, passwd)
 		VALUES(#{num}, #{title}, #{author}, #{content}, #{num}, 0, 0, #{passwd})
 		
 	</insert>
+	<update id="readcntUpdate" parameterType="board">
+		UPDATE board
+		SET	readcnt = readcnt + 1
+		WHERE num = ${num}
+	</update>
+	
+	<select id="boardDetail" parameterType="board" resultType="board">
+		<!-- Board - boardList -->
+		SELECT num, author, title, content, readcnt,
+			   to_char(writeday, 'YYYY-MM-DD') writeday,
+			   repRoot, repStep, repIndent
+		FROM board
+		WHERE num = ${num}
+	</select>
 </mapper>

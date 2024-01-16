@@ -19,17 +19,24 @@ public class BoardMapperImpl implements BoardMapper {
 	public List<BoardVO> boardList(BoardVO vo) {
 		return session.selectList("boardList");
 	}
-	
+
 	@Override
 	public int boardInsert(BoardVO vo) {
-//		return session.insert("boardInsert");
 		return session.insert("boardInsert", vo);
 	}
 
+	@Override
+	public BoardVO boardDetail(BoardVO vo) {
+		return (BoardVO) session.selectOne("boardDetail", vo);
+	}
 
 	public void close() {
 		session.close();
 	}
 
+	@Override
+	public void readcntUpdate(BoardVO vo) {
+		session.update("readcntUpdate", vo);
+	}
 
 }
