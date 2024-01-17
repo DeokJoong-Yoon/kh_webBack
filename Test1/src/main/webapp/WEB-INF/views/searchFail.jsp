@@ -22,8 +22,11 @@
 		<h3>
 			<%= (String)request.getAttribute("message") %>
 		</h3>
+		<h3>
+			${message}
+		</h3>
 		<div>
-			<a href="/Test1/selectUser">메인 페이지로 이동</a>
+			<a href="/Test1/index.jsp">메인 페이지로 이동</a>
 		</div>
 	</body>
 </html>

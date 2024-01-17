@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.kh.test.user.model.dao.UserDAO;
+import edu.kh.test.user.model.service.UserService;
 import edu.kh.test.user.model.vo.UserDTO;
 
 /**
@@ -26,17 +26,20 @@ public class SelectUserServlet extends HttpServlet {
 		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		dto.setUserNo(userNo);
 		
-		UserDAO dao = new UserDAO();
-		UserDTO result = dao.userSearch(dto);
+//		UserDAO dao = UserDAO.getInstance();
+//		UserDTO userDTO = dao.userSearch(dto);
+		
+		UserService service = UserService.getInstance();
+		UserDTO userDTO = service.memberSelect(dto);
 		
 		String path = "";
 		
-		if (result != null) {
-			request.setAttribute("dto", result);
-			path = "views/searchSuccess.jsp";
+		if (userDTO != null) {
+			request.setAttribute("dto", userDTO);
+			path = "/WEB-INF/views/searchSuccess.jsp";
 		} else {
 			request.setAttribute("message", "조회 결과가 없습니다.");
-			path = "views/searchFail.jsp";
+			path = "/WEB-INF/views/searchFail.jsp";
 		}
 		
 		RequestDispatcher dispatcher = null;

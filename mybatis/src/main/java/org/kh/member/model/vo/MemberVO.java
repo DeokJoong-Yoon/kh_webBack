@@ -2,6 +2,23 @@ package org.kh.member.model.vo;
 
 public class MemberVO {
 	private int userNo;
+	private String userId;
+	private String userPw;
+	private String userName;
+	private String userAddr;
+	private String regDate;
+
+	public MemberVO() {
+	}
+
+	public MemberVO(int userNo, String userId, String userPw, String userName, String userAddr, String regDate) {
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userPw = userPw;
+		this.userName = userName;
+		this.userAddr = userAddr;
+		this.regDate = regDate;
+	}
 
 	public int getUserNo() {
 		return userNo;
@@ -43,8 +60,12 @@ public class MemberVO {
 		this.userAddr = userAddr;
 	}
 
-	private String userId;
-	private String userPw;
-	private String userName;
-	private String userAddr;
+	public String getRegDate() {
+		return regDate;
+	}
+
+	public void setRegDate(String regDate) {
+		this.regDate = regDate;
+	}
+
 }

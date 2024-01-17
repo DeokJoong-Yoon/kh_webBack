@@ -19,7 +19,7 @@ public class SqlSessionTemplate {
 		SqlSession session = null;
 
 		// 해당 리소스 경로(xml파일) 작성
-		String resource = "config/mybatis-config.xml";
+		String resource = "resources/mybatis-config.xml";
 		try {
 			Reader reader = Resources.getResourceAsReader(resource);
 			SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);

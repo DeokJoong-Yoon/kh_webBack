@@ -9,6 +9,13 @@ public class UserDTO {
 	public UserDTO() {
 	}
 
+	public UserDTO(int userNo, String userId, String userName, int userAge) {
+		this.userNo = userNo;
+		this.userId = userId;
+		this.userName = userName;
+		this.userAge = userAge;
+	}
+
 	public int getUserNo() {
 		return userNo;
 	}

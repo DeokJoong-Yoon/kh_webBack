@@ -13,20 +13,22 @@
 		
 		<link rel="shortcut icon" href="../image/icon.png" />
 		<link rel="apple-touch-icon" href="../image/icon.png" />
-				
-		<script src="/include/js/jquery-3.7.1.min.js"></script>
-		<script type="text/javascript">
-		
-		$(function() {
-			$("#btn").on("click", function() {
-				let userNo = $("#userNo").val();
-				location.href = "/Test1/selectUser?userNo="+userNo;
-			});
-		});</script>
+		<%--		
+		<script src="js/jquery-3.7.1.min.js"></script>
+		<script src="js/btn.js"></script>
+		 
+		<script src="${pageContext.request.contextPath}/js/jquery-3.7.1.min.js"></script>
+		<script src="${pageContext.request.contextPath}/js/btn.js"></script>
+		--%>
+		<script src="/Test1/js/jquery-3.7.1.min.js"></script>
+		<script src="/Test1/js/btn.js"></script>
+		<script src="/Test1/js/common.js"></script>
 	</head>
 	<body>
 		<h1>회원 정보 조회(회원 번호 검색)</h1>
-		<input type="text" id="userNo" name="userNo" placeholder="회원 번호 입력" />
-		<input type="button" id="btn" name="btn" value="조회">
+		<form id="form">
+			<input type="text" id="userNo" name="userNo" placeholder="회원 번호 입력" />
+			<input type="button" id="btn" name="btn" value="조회">
+		</form>
 	</body>
 </html>

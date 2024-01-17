@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="mybatis">
+	
+	<insert id="insertMemeber" parameterType="member">
+		INSERT INTO member(user_no, user_id, user_pw, user_name, user_addr, reg_date)
+		VALUES(SEQ_MEMBER.nextval, #{userId}, #{userPw}, #{userName}, #{userAddr}, DEFAULT)
+	</insert>
+	
+	<resultMap type="member" id="memberMap">
+		<result column="user_no" property="userNo"/>
+		<result column="user_id" property="userId"/>
+		<result column="user_pw" property="userPw"/>
+		<result column="user_name" property="userName"/>
+		<result column="user_addr" property="userAddr"/>
+		<result column="reg_date" property="regDate"/>
+	</resultMap>
+	
+	<select id="selectMember" resultMap="memberMap">
+		SELECT user_no, user_id, user_pw, user_name, user_addr, reg_date
+		FROM member
+	</select>
+	<!-- 
+	<select id="selectMember" resultType="member">
+		SELECT user_no userNo, user_id userId, user_pw userPw, user_name userName,
+			   user_addr userAddr, reg_date regDate
+		FROM member
+	</select>
+	 -->
+</mapper>

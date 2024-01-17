@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
+<%@ page import="edu.kh.test.user.model.vo.UserDTO" %>
+<% UserDTO dto = (UserDTO) request.getAttribute("dto"); %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,7 +24,7 @@
 		<h3>
 			회원 정보
 		</h3>
-		<table>
+		<table border="1">
 			<tr>
 				<td>회원번호</td>
 				<td>회원 아이디</td>
@@ -30,12 +32,22 @@
 				<td>회원 나이</td>
 			</tr>
 			<tr>
-				<td><%= request.getAttribute("message") %></td>
-				<td><%= request.getAttribute("message") %></td>
-				<td><%= request.getAttribute("message") %></td>
-				<td><%= request.getAttribute("message") %></td>
+				<td><%= dto.getUserNo() %></td>
+				<td><%= dto.getUserId() %></td>
+				<td><%= dto.getUserName() %></td>
+				<td><%= dto.getUserAge() %></td>
+			</tr>
+			<tr>
+				<td>${dto.userNo}</td>
+				<td>${dto.userId}</td>
+				<td>${dto.userName}</td>
+				<td>${dto.userAge}</td>
 			</tr>
 		</table>		
-		
+		<div>
+			<a href="/Test1/index.jsp">메인 페이지로 이동</a><br />
+			<a href="/Test1">메인 페이지로 이동</a><br />
+			<a href="${pageContext.request.contextPath}">메인 페이지로 이동</a><br />
+		</div>
 	</body>
 </html>
