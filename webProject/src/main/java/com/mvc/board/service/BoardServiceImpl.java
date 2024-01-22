@@ -50,9 +50,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override
-	public BoardVO boardDetail(BoardVO boardVO) {
-		BoardVO vo = mapper.boardDetail(boardVO);
-		return vo;
+	public BoardVO boardDetail(BoardVO vo) {
+		BoardVO boardVO = mapper.boardDetail(vo);
+		boardVO.setContent(boardVO.getContent().replaceAll("\n", "<br />"));
+		return boardVO;
 	}
 
 	@Override

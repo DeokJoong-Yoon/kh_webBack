@@ -32,7 +32,7 @@
 	<select id="boardDetail" parameterType="board" resultType="board">
 		<!-- Board - boardList -->
 		SELECT num, author, title, content, readcnt,
-			   to_char(writeday, 'YYYY-MM-DD') writeday,
+			   to_char(writeday, 'YYYY-MM-DD HH24:MI:SS') writeday,
 			   repRoot, repStep, repIndent
 		FROM board
 		WHERE num = ${num}
