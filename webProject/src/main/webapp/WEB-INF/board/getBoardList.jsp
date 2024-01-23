@@ -17,6 +17,7 @@
 					<tr class="text-center">
 						<th class="col-md-1">번호</th>
 						<th class="col-md-6">제목</th>
+						<th class="col-md-6">제목</th>
 						<th class="col-md-2">작성자</th>
 						<th class="col-md-2">날짜</th>
 						<th class="col-md-1">조회수</th>
@@ -29,6 +30,7 @@
 							<tr class="text-center" data-num="${vo.num}">
 								<td>${vo.num}</td>
 								<td class="text-left"><span class="goDetail">${vo.title}</span></td>
+								<td class="text-left"><a href="/board/detailBoard.do?num=${vo.num }">${vo.title }</a></td>
 								<td>${vo.author}</td>
 								<td>${vo.writeday}</td>
 								<td>${vo.readcnt}</td>

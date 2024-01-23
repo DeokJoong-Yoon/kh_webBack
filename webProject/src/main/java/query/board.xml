@@ -23,11 +23,24 @@
 		VALUES(#{num}, #{title}, #{author}, #{content}, #{num}, 0, 0, #{passwd})
 		
 	</insert>
+	
+	<update id="boardUpdate" parameterType="board">
+		UPDATE board
+		SET	title = #{title}, content = #{content}, writeday = sysdate 
+		<if test="passwd != ''">, passwd = #{passwd}</if>
+		WHERE num = #{num}
+	</update>
+	
 	<update id="readcntUpdate" parameterType="board">
 		UPDATE board
 		SET	readcnt = readcnt + 1
-		WHERE num = ${num}
+		WHERE num = #{num}
 	</update>
+	
+	<delete id="boardDelete" parameterType="board">
+		DELETE FROM board
+		WHERE num = #{num}
+	</delete>
 	
 	<select id="boardDetail" parameterType="board" resultType="board">
 		<!-- Board - boardList -->
@@ -35,6 +48,6 @@
 			   to_char(writeday, 'YYYY-MM-DD HH24:MI:SS') writeday,
 			   repRoot, repStep, repIndent
 		FROM board
-		WHERE num = ${num}
+		WHERE num = #{num}
 	</select>
 </mapper>

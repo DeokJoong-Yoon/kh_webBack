@@ -39,4 +39,14 @@ public class BoardMapperImpl implements BoardMapper {
 		session.update("readcntUpdate", vo);
 	}
 
+	@Override
+	public int boardUpdate(BoardVO vo) {
+		return session.update("boardUpdate", vo);
+	}
+
+	@Override
+	public int boardDelete(BoardVO vo) {
+		return session.delete("boardDelete", vo);
+	}
+
 }

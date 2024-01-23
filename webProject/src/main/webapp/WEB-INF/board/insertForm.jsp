@@ -9,7 +9,7 @@
 				<div class="mb-3 row">
     				<label for="author" class="col-sm-2 col-form-label">작 성 자</label>
     				<div class="col-sm-10">
-      					<input type="text" class="form-control" name="author" id="author" placeholder="작성자 입력" />
+      					<input type="text" class="form-control" name="author" id="author" />
     				</div>
   				</div>
 				<div class="mb-3 row">
@@ -32,8 +32,8 @@
   				</div>  				
 			</form>
 			<div class="text-end">
-				<button type="button" class="btn btn-primary" id="boardInsert">저장</button>
-				<button type="button" class="btn btn-primary" id="boardListBtn">목록</button>
+				<button type="button" id="boardInsert" class="btn btn-primary">입력</button>
+				<button type="button" id="boardListBtn" class="btn btn-primary">목록</button>
 			</div>
 		</div>
 		<script src="/include/js/insertForm.js"></script>

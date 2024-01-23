@@ -1,18 +1,31 @@
+let buttonCheck = ""; // buttonCheck는 수정 버튼과 삭제버튼을 구별하기 위한 변수
 $(function() {
-	/*저장 버튼 클릭시 ㅇ처리 이벤트 */
-	$("#boardInsert").click(function() {
-		// 입력값 체크
-		if(!chkData("#author", "이름을 ")) return;
-		else if(!chkData("#title", "제목을 ")) return;
-		else if(!chkData("#content", "작성할 내용을 ")) return;
-		else if(!chkData("#passwd", "비밀번호를")) return;
-		else {
-			$("#f_writeForm").attr({
-				"method" :"post",
-				"action" : "/board/insertBoard.do" 
-			});
-			$("#f_writeForm").submit();
-		}
+	let btnInit = function() {
+		$("#message").removeClass("text-danger");
+		$("#message").addClass("text-primary");
+		$("#message").text("작성시 입력한 비밀번호를 입력해 주세요.");
+	}
+	
+	/* 수정 버튼 클릭 시 처리 이벤트 */
+	$("#updateForm").on("click", ()=>{
+		$("#f_data").attr({
+			"method" : "post",
+			"action" : "/board/updateForm.do"
+		});
+		$("#f_data").submit();;
+		
+		// 비밀번호 확인후 처리
+	});
+	
+	/**삭제 버튼 클릭 시 처리 이벤트 */
+	$("#boardDelete").on("click", () =>{
+		$("#f_data").attr({
+			"method" : "post",
+			"action" : "/board/deleteBoard.do"
+		});
+		$("#f_data").submit();
+		
+		// 비밀번호 확인 후 처리
 	});
 	
 	/** 목록 버튼 클릭 시 처리 이벤트 */

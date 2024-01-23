@@ -2,10 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="true" %>
 <%@ include file="/WEB-INF/common/common.jsp" %>
-<body>
-	<div class="container">
-		<div class="text-center"><h3>게시판 상세페이지</h3></div>
-	</div>
+
 <%-- ==================== 상세 정보 보여주기 시작 ====================--%>
 <%-- 표현 언어의 ${detail.num}은 
    BoardVO detail = (BoardVO request.getAttribute("detail");
@@ -60,7 +57,7 @@
 						<td class="col-md-3">글제목</td>
 						<td colspan="3" class="col-md-9 text-start">${detail.title }</td>
 					</tr>
-					<tr>
+					<tr class="table-height">
 						<td class="col-md-3">글내용</td>
 						<td colspan="3" class="col-md-9 text-start">${detail.content }</td>
 					</tr>
