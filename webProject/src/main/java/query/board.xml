@@ -50,4 +50,11 @@
 		FROM board
 		WHERE num = #{num}
 	</select>
+	
+	<select id="boardPasswdChk" parameterType="board" resultType="int">
+		SELECT 
+		NVL((SELECT 1 FROM board WHERE num = #{num} AND passwd = #{passwd} ), 0) 
+		as state FROM dual
+	</select>
+	
 </mapper>

@@ -9,13 +9,16 @@ public interface BoardService {
 
 	public int boardInsert(BoardVO vo);
 
+	public void readcntUpdate(BoardVO vo);
+
 	public BoardVO boardDetail(BoardVO vo);
 
-	public void readcntUpdate(BoardVO vo);
+	public int checkPasswd(BoardVO vo);
 
 	public BoardVO updateForm(BoardVO vo);
 
 	public int boardUpdate(BoardVO vo);
 
 	public int boardDelete(BoardVO vo);
+
 }

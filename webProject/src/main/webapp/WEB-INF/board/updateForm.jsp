@@ -53,5 +53,13 @@
 		</div>
 	</div>	
 	<script src="/include/js/updateForm.js"></script>
+	<%--<script>
+		$(function() {
+			let errorMsg = "${errorMsg}";
+			if (errorMsg != "") {
+				alert(errorMsg);}
+			}
+		});
+	</script> --%>
 </body>
 </html>

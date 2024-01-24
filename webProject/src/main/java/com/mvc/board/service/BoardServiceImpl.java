@@ -26,7 +26,6 @@ public class BoardServiceImpl implements BoardService {
 	private static BoardServiceImpl service = null;
 
 	private BoardMapper mapper = new BoardMapperImpl();
-	
 
 	private BoardServiceImpl() {
 	}
@@ -37,7 +36,7 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return service;
 	}
-	
+
 	public List<BoardVO> boardList(BoardVO vo) {
 		List<BoardVO> boardList = mapper.boardList(vo);
 		return boardList;
@@ -48,7 +47,12 @@ public class BoardServiceImpl implements BoardService {
 		int result = mapper.boardInsert(vo);
 		return result;
 	}
-	
+
+	@Override
+	public void readcntUpdate(BoardVO vo) {
+		mapper.readcntUpdate(vo);
+	}
+
 	@Override
 	public BoardVO boardDetail(BoardVO vo) {
 		BoardVO boardVO = mapper.boardDetail(vo);
@@ -57,8 +61,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void readcntUpdate(BoardVO vo) {
-		mapper.readcntUpdate(vo);
+	public int checkPasswd(BoardVO vo) {
+		int result = mapper.boardPasswdChk(vo);
+		return result;
 	}
 
 	@Override
@@ -79,4 +84,5 @@ public class BoardServiceImpl implements BoardService {
 		int result = mapper.boardDelete(vo);
 		return result;
 	}
+
 }

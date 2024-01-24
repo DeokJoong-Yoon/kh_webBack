@@ -26,17 +26,18 @@ public class BoardMapperImpl implements BoardMapper {
 	}
 
 	@Override
+	public void readcntUpdate(BoardVO vo) {
+		session.update("readcntUpdate", vo);
+	}
+
+	@Override
 	public BoardVO boardDetail(BoardVO vo) {
 		return (BoardVO) session.selectOne("boardDetail", vo);
 	}
 
-	public void close() {
-		session.close();
-	}
-
 	@Override
-	public void readcntUpdate(BoardVO vo) {
-		session.update("readcntUpdate", vo);
+	public int boardPasswdChk(BoardVO vo) {
+		return (int)session.selectOne("boardPasswdChk", vo);
 	}
 
 	@Override
@@ -47,6 +48,10 @@ public class BoardMapperImpl implements BoardMapper {
 	@Override
 	public int boardDelete(BoardVO vo) {
 		return session.delete("boardDelete", vo);
+	}
+
+	public void close() {
+		session.close();
 	}
 
 }

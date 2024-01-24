@@ -13,7 +13,10 @@ public interface BoardMapper {
 
 	public BoardVO boardDetail(BoardVO vo);
 
+	public int boardPasswdChk(BoardVO vo);
+
 	public int boardUpdate(BoardVO vo);
 
 	public int boardDelete(BoardVO vo);
+
 }

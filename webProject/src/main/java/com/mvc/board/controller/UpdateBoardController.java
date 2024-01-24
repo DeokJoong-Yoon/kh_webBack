@@ -15,21 +15,22 @@ public class UpdateBoardController implements Controller {
 		String passwd = request.getParameter("passwd");
 		if (passwd.isEmpty())
 			passwd = ""; // 비밀번호가 비어있을 때 null이 아닌 ""(빈문자)로 제어를 위해 설정
-		
+
 		BoardVO vo = new BoardVO();
 		vo.setNum(Integer.parseInt(request.getParameter("num")));
 		vo.setTitle(request.getParameter("title"));
 		vo.setContent(request.getParameter("content"));
 		vo.setPasswd(passwd);
-		
+
 		BoardService service = BoardServiceImpl.getInstance();
 		int result = service.boardUpdate(vo);
 		String path = null;
-		
-		if(result == 1) {
-			path = "/board/detailBoard.do?num=" + vo.getNum();
-		}
 
+		if (result == 1) { // 수정 성공시 상세페이지로 이동. 이때 레코드의 글번호를 기준으로 조회.
+			path = "/board/detailBoard.do?num=" + vo.getNum();
+		} /*else { // 수정 실패시 수정화면으로 이동. 이때 레코드의 글번호를 기준으로 조회. 
+			path = "/board/updateForm.do?num="+vo.getNum()+"&code=1";
+		}*/
 		return path;
 	}
 }

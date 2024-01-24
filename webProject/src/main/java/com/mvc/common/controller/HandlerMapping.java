@@ -8,6 +8,7 @@ import com.mvc.board.controller.DetailBoardController;
 import com.mvc.board.controller.GetBoardListController;
 import com.mvc.board.controller.InsertBoardController;
 import com.mvc.board.controller.InsertFormController;
+import com.mvc.board.controller.PasswdCheckController;
 import com.mvc.board.controller.UpdateBoardController;
 import com.mvc.board.controller.UpdateFormController;
 
@@ -22,6 +23,7 @@ public class HandlerMapping {
 		mappings.put("/board/insertForm.do", new InsertFormController());
 		mappings.put("/board/insertBoard.do", new InsertBoardController());
 		mappings.put("/board/detailBoard.do", new DetailBoardController());
+		mappings.put("/board/passwdCheck.do", new PasswdCheckController());
 		mappings.put("/board/updateForm.do", new UpdateFormController());	
 		mappings.put("/board/updateBoard.do", new UpdateBoardController());	
 		mappings.put("/board/deleteBoard.do", new DeleteBoardController());	
