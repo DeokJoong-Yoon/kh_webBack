@@ -23,5 +23,13 @@ $(function() {
 		location.href ="/board/insertForm.do";
 	});
 	
+	$("#searchBtn").on("click", function() {
+		$("#searchForm").attr({
+			"method" : "post",
+			"action" : "/board/getBoardList.do"
+		});
+		$("#searchForm").submit();
+	});
+	
 
 });

@@ -10,6 +10,18 @@
 			<input type="hidden" name="num" id="num" />
 		</form>
 		
+		<div>
+		<form name="searchForm" id = "searchForm">
+			<select id="search" name="search">
+				<option value="title">제목</option>
+				<option value="content">내용</option>
+				<option value="author">작가</option>
+			</select>
+			<input type="text" id ="keyword" name="keyword" placeholder="검색할 단어 입력" />
+			<button type="button" id="searchBtn" class="btn btn-primary btn-sm" >검색</button>
+		</form>
+		</div>
+		
 		<%-- =================== 리스트 시작 =================== --%>
 		<div id="boardList">
 			<table summary="게시판 리스트" class="table">

@@ -14,14 +14,20 @@ public class GetBoardListController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
-		BoardVO vo = null;
-				
+		BoardVO vo = new BoardVO();
+
 		BoardService service = BoardServiceImpl.getInstance();
+
+		
+		String keyword = request.getParameter("keyword");
+		if (keyword != null) {
+			String search = request.getParameter("search");
+			vo.setSearch(search);
+			vo.setKeyword(keyword);
+		}
 		List<BoardVO> list = service.boardList(vo);
-		
+
 		request.setAttribute("list", list);
-		
-		//jsp 페이지에서 사용방법은 ${requestScope.list}
 		return "/board/getBoardList";
 	}
 

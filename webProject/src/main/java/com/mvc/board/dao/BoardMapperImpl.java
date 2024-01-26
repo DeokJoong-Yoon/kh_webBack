@@ -17,7 +17,7 @@ public class BoardMapperImpl implements BoardMapper {
 
 	@Override
 	public List<BoardVO> boardList(BoardVO vo) {
-		return session.selectList("boardList");
+		return session.selectList("boardList", vo);
 	}
 
 	@Override
