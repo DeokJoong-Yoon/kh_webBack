@@ -14,17 +14,20 @@ public class GetBoardListController implements Controller {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		String search = request.getParameter("search");
+		if (search == null) {
+			search = "all";
+		}
+		
 		BoardVO vo = new BoardVO();
-
-		BoardService service = BoardServiceImpl.getInstance();
-
 		
 		String keyword = request.getParameter("keyword");
-		if (keyword != null) {
-			String search = request.getParameter("search");
-			vo.setSearch(search);
-			vo.setKeyword(keyword);
-		}
+		search = request.getParameter("search");
+		vo.setSearch(search);
+		vo.setKeyword(keyword);
+
+		BoardService service = BoardServiceImpl.getInstance();
 		List<BoardVO> list = service.boardList(vo);
 
 		request.setAttribute("list", list);

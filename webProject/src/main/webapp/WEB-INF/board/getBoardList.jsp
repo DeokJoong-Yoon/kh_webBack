@@ -11,14 +11,27 @@
 		</form>
 		
 		<div>
-		<form name="searchForm" id = "searchForm">
-			<select id="search" name="search">
-				<option value="title">제목</option>
-				<option value="content">내용</option>
-				<option value="author">작가</option>
-			</select>
-			<input type="text" id ="keyword" name="keyword" placeholder="검색할 단어 입력" />
-			<button type="button" id="searchBtn" class="btn btn-primary btn-sm" >검색</button>
+		<form name="f_search" id = "f_search">
+			<div class="row g-2 align-items-center">
+				<div class="col-auto">
+					<label for="col-form-label">검색조건</label>
+				</div>
+				<div class="col-auto">
+					<select id="search" name="search" class="form-select form-select-sm">
+						<option value="all">전체조회</option>
+						<option value="title">제목</option>
+						<option value="content">내용</option>
+						<option value="author">작가</option>
+					</select>
+				</div>
+				<div class="col-auto">
+					<input type="text" id ="keyword" name="keyword" placeholder="검색할 단어 입력"
+					class="form-control form-control-sm"/>
+				</div>
+				<div class="col-auto">
+					<button type="button" id="searchBtn" class="btn btn-primary btn-sm" >검색</button>
+				</div>
+			</div>
 		</form>
 		</div>
 		
@@ -65,5 +78,13 @@
 		</div>
 	</div>
 	<script src="/include/js/getBoardList.js"></script>
+	<script>
+		$(function() {
+			if ('${param.keyword}' != "") {
+				$("#keyword").val('${param.keyword}');
+				$("#search").val('${param.search}');
+			}
+		});
+	</script>
 </body>
 </html>

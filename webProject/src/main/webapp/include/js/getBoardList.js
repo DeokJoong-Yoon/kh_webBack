@@ -24,11 +24,16 @@ $(function() {
 	});
 	
 	$("#searchBtn").on("click", function() {
-		$("#searchForm").attr({
+		if($("#search").val() != "all") {
+			if(!chkData("#keyword", "검색어를")) return;
+		} else if($("#search").val() == "all") {
+			$("#keyword").val("");
+		}
+		$("#f_search").attr({
 			"method" : "post",
 			"action" : "/board/getBoardList.do"
 		});
-		$("#searchForm").submit();
+		$("#f_search").submit();
 	});
 	
 
