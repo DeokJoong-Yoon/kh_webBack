@@ -374,11 +374,76 @@ const App = () => {
 };
 */
 
+/**
 import MyComponent from './MyComponent';
 const App = () => {
 	const text = '단순함이란 궁극의 정교함이다.';
 	return <MyComponent saying={text} />;
 };
+ */
 
+/**
+import MyComponent from './MyComponent';
+const App = () => {
+  // return <MyComponent name="홍길동" />;
+  // return <MyComponent name="홍길동" address="서울시 강남구" />;
+  // return <MyComponent />
+  const name = '김희진';
+  const children = 'Hello, React';
+  return <MyComponent name={name}>{children}</MyComponent>;
+}
+ */
+
+/**
+import MyComponent from './MyComponent';
+
+const App = () => {
+	const name = '김희진';
+	const age = '25';
+	const a = parseInt(age);
+	const children = 'Hello, React';
+	//return <MyComponent name={name} age={a}>{children}</MyComponent>
+	return (
+		<MyComponent name={name} favoriteNumber={a}>
+			{children}
+		</MyComponent>
+	);
+};
+ */
+
+/*
+import MyComponent from './MyComponent';
+
+const App = () => {
+	const name = '김희진';
+	const age = '25';
+	const a = parseInt(age);
+	const children = 'Hello, React';
+	//return <MyComponent name={name} age={a}>{children}</MyComponent>
+	return (
+		<MyComponent name={name} favoriteNumber={a}>
+			{children}
+		</MyComponent>
+	);
+};
+*/
+/*
+import Counter from './Counter';
+const App = () => {
+	return <Counter></Counter>;
+};
+*/
+/**
+import Say from './Say';
+const App = () => {
+	return <Say></Say>;
+};
+ */
+import EventPractice from './EventPractice';
+
+const App = () => {
+  return <EventPractice />
+};
 export default App;
+
 // export {App};
