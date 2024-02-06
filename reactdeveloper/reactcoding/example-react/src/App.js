@@ -1,7 +1,6 @@
-// import logo from './logo.svg';
-import './App.css';
+ /*import logo from './logo.svg';
 
-/*
+
 function App() {
   return (
     <div className="App">
@@ -439,11 +438,44 @@ const App = () => {
 	return <Say></Say>;
 };
  */
+
+/*
 import EventPractice from './EventPractice';
 
 const App = () => {
   return <EventPractice />
 };
+*/
+
+/*
+import UseEffectExample from './UseEffectExample';
+
+const App = () => {
+  return <UseEffectExample/>
+};
+*/
+/**
+import StateExample from "./StateExample";
+const App = () => {
+	return <StateExample />;
+};
+*/
+
+import "./App.css";
+import Header from "./component/Header";
+import Body from "./component/Body";
+import Footer from "./component/Footer";
+
+const App = () => {
+	return (
+		<div className="App">
+			<Header />
+			<Body />
+			<Footer />
+		</div>
+	);
+};
+
 export default App;
 
 // export {App};
