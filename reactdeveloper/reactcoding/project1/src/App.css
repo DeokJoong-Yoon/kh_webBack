@@ -1,8 +1,8 @@
+/*
 .App {
   text-align: center;
 }
 
-/*
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -10,7 +10,7 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 30s linear;
+    animation: App-logo-spin infinite 20s linear;
   }
 }
 
@@ -37,12 +37,21 @@
     transform: rotate(360deg);
   }
 }
-
-.react {
-  background-color: aqua;
-  color : red;
-  font-size : 48px;
-  font-Weight: bold;
-  padding: 16;
-}
 */
+
+body {
+  padding : 20px;
+}
+
+.App {
+  margin : 0 auto;
+  width : 500px;
+}
+
+.App > section {
+  padding : 20px;
+  background-color : rgb(245, 245, 245);
+  border : 1px solid rgb(240, 240, 240);
+  border-radius : 5px;
+  margin-bottom : 10px;
+}

@@ -38,16 +38,17 @@ setTimeout(() => {
  */
 
 function BlackDog() {
-	this.name = '흰동우';
+	this.name = "흰동우";
 	return {
-		name: '검둥이',
+		name: "검둥이",
 		bark: function () {
-            // function()에서 : 현재 객체의 this
-			console.log(this.name + '멍멍!');
+			// function()에서 : 현재 객체의 this
+			console.log(this.name + "멍멍!");
 		},
 	};
 }
 
+/*
 const blackDog = new BlackDog();
 blackDog.bark();
 
@@ -64,3 +65,13 @@ function WhiteDog() {
 
 const whiteDog = new WhiteDog();
 whiteDog.bark();
+*/
+
+const numbers = [1, 2, 3, 4, 5];
+let newNumbers = numbers.filter(myFunction);
+function myFunction(value, index, array) {
+	return value > 3;
+}
+
+console.log(numbers);
+console.log(newNumbers);

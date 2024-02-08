@@ -1,0 +1,15 @@
+.App {
+  margin : 0 auto;
+  width : 800px;
+  text-align : center;
+}
+
+table {
+  margin : 0 auto;
+  width : 800px;
+  text-align : center;
+}
+
+.margin-left {
+  margin-left : 15px;
+}

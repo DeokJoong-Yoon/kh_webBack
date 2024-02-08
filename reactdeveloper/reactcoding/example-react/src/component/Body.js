@@ -352,6 +352,7 @@ const Body = () => {
 };
  */
 
+/**
 import React, { useState } from "react";
 
 const Body = () => {
@@ -494,4 +495,91 @@ const Body = () => {
 		</form>
 	);
 };
+ */
+
+/**
+import React, { useState } from "react";
+
+function Viewer({number}) {
+	return <div>{number % 2 === 0 ? <h3>짝수</h3> : <h3>홀수</h3>}</div>
+}
+ 
+
+function Viewer(props) {
+	const { number } = props;
+	return <div>{number % 2 === 0 ? <h3>짝수</h3> : <h3>홀수</h3>}</div>;
+}
+
+const Body = () => {
+	const [number, setNumber] = useState(0);
+	// useState 의 문법
+	// const [ name(State 변수), setName(set 함수)] = useState(초깃값);
+	// 현재 상태값을 저장하고 있는 변수, 상태를 업데이트하는 함수
+	const onIncrease = () => {
+		setNumber(number + 1);
+	};
+	const onDecrease = () => {
+		setNumber(number - 1);
+	};
+	return (
+		<div>
+			<h2>{number}</h2>
+			<Viewer number={number} />
+			{/*이 컴포넌트는 Porps로 Body 컴포넌트에 있는 state 변수 number가 전달
+			   자식 컴포넌트는 Props로 전달된 state 값이 변하면 자신도 리렌더된다는 사실.
+			}
+			<div>
+				<button onClick={onDecrease}> - </button>
+				<button onClick={onIncrease}> + </button>
+			</div>
+		</div>
+	);
+};
+*/
+
+/**
+ * 리액트의 REf를 이용하면 돔(DOM) 요소들을 직접 조작할 수 있다.
+ * Ref는 Reference의 줄임발로 참조라는 뜻.
+ *
+ * useRef 사용하기
+ * 리액트에서는 userRef라는 리액트 함수를 이용해 Ref 객체를 생성한다.
+ */
+import React, { useState, useRef } from "react";
+
+const Body = () => {
+	const [message, setMessage] = useState("");
+	const textRef = useRef();
+
+	const handleChange = (e) => {
+		setMessage(e.target.value);
+	};
+	const handleClick = (e) => {
+		// alert(message);
+		// textRef.current.value = ""; // useRef로 입력 폼 초기화하기
+		/*
+		if (message.length < 5) {
+			textRef.current.focus(); // useRef로 포커스하기
+		} else {
+			alert(message);
+			setMessage("");
+		}
+		*/
+
+		if (message === "") {
+			alert("데이터를 입력해 주세요.");
+			textRef.current.focus();
+		} else {
+			alert(message);
+			setMessage("");
+		}
+	};
+	return (
+		<div>
+			<input ref={textRef} value={message} onChange={handleChange}></input>
+			<p>5글자 이상 입력해주세요.</p>
+			<button onClick={handleClick}>작성 완료</button>
+		</div>
+	);
+};
+
 export default Body;

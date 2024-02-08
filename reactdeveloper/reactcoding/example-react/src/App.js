@@ -1,4 +1,4 @@
- /*import logo from './logo.svg';
+/*import logo from './logo.svg';
 
 
 function App() {
@@ -461,6 +461,7 @@ const App = () => {
 };
 */
 
+
 import "./App.css";
 import Header from "./component/Header";
 import Body from "./component/Body";
@@ -476,6 +477,47 @@ const App = () => {
 	);
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // export {App};
