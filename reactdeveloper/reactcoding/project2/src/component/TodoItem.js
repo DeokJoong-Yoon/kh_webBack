@@ -1,18 +1,21 @@
-import './TodoItem.css';
+import "./TodoItem.css";
 
-const TodoItem = () => {
-    return (
-        <div className="TodoItem">
-            <div className="checkboxCol">
-                <input type="checkbox"/>
-            </div>
-            <div className="titleCol">할 일</div>
-            <div className="dateCol">{new Date().toLocaleDateString}</div>
-            <div className="btnCol">
-                <button>삭제</button>
-            </div>
-        </div>
-    );
+const TodoItem = ({ id, content, isDone, createDate, onDelete }) => {
+    const onClickDelete = () => {
+        onDelete(id);
+    }
+  return (
+    <div className="TodoItem" key={id}>
+      <div className="checkboxCol">
+        <input type="checkbox" checked={isDone} />
+      </div>
+      <div className="titleCol">{content}</div>
+      <div className="dateCol">{new Date(createDate).toLocaleDateString()}</div>
+      <div className="btnCol">
+        <button type="button" onClick={onClickDelete}>삭제</button>
+      </div>
+    </div>
+  );
 };
 
 export default TodoItem;

@@ -13,7 +13,8 @@ const Header = () => {
 const Header = () => {
     return (
         <div>
-            <h1>오늘은</h1>
+            <h3>오늘은🗓️</h3>
+            <h1>{new Date().toDateString()}</h1>
         </div>
     );
 }

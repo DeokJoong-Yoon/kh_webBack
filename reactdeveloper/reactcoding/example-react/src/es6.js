@@ -66,7 +66,7 @@ function WhiteDog() {
 const whiteDog = new WhiteDog();
 whiteDog.bark();
 */
-
+/* 
 const numbers = [1, 2, 3, 4, 5];
 let newNumbers = numbers.filter(myFunction);
 function myFunction(value, index, array) {
@@ -75,3 +75,9 @@ function myFunction(value, index, array) {
 
 console.log(numbers);
 console.log(newNumbers);
+*/
+
+// 배열 안의 어떤 요소라도 주어진 판별 함수를 적어도 하나라도 통과하는지 테스트
+const array = [1, 3, 5];
+const even = (element) => element % 2 === 0;
+console.log(array.some(even));

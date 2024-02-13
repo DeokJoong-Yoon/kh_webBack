@@ -303,7 +303,7 @@ const App = () => {
     if (!id) {
       return false;
     }
-    return movie.some((it) => it.id == id);
+    return movie.some((it) => String(it.id) === id);
   };
 
   const handleAddMovie = () => {

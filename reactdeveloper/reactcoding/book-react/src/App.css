@@ -2,6 +2,7 @@
   margin : 0 auto;
   width : 800px;
   text-align : center;
+  border : 1px solid black;
 }
 
 table {
@@ -13,3 +14,4 @@ table {
 .margin-left {
   margin-left : 15px;
 }
+
