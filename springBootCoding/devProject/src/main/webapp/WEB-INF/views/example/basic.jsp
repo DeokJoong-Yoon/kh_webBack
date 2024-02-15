@@ -13,6 +13,6 @@
 		<link rel="apple-touch-icon" href="/image/icon.png" />
 	</head>
 	<body>
-		<p>${serverTime}
+		<h1>basic</h1>
 	</body>
 </html>
