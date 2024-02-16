@@ -3,12 +3,16 @@ package com.boot.example.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.boot.example.domain.ExampleVO;
 import com.boot.example.domain.SampleDTO;
@@ -97,22 +101,61 @@ public class SampleController {
 	@GetMapping("/exam02Bean")
 	public String exam02Bean(@ModelAttribute SampleDTOList list) {
 		log.info("list name/age : " + list);
-		
+
 		return "example/exam02Bean";
 	}
-	
+
 	@GetMapping("/exam02Bean1")
 	public String exam02Bean1(@ModelAttribute ExampleVO exampleVO) {
 		log.info("ExampleVO no/name/phone : " + exampleVO.toString());
-		
+
 		return "example/exam02Bean1";
 	}
-	
+
 	@GetMapping("/exam03")
 	public String exam03(SampleDTO dto, @ModelAttribute("number") int number) {
 		log.info("dto : " + dto);
 		log.info("number : " + number);
-		
+
 		return "example/exam03";
+	}
+
+	/**
+	 * @ResponseBody : 일반적인 JSP와 같은 뷰로 전달되는 게 아니라 데이터 자체를 전달하기 위한 용도이다.
+	 */
+	@GetMapping(value = "/exam04", produces = "text/plain; charset=UTF-8")
+	@ResponseBody
+	public String exam04() {
+		return "화면에 데이터 그대로 출력합니다.";
+	}
+
+	@GetMapping("/exam05")
+//	@GetMapping(value = "/exam05", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public SampleDTO exam05() {
+		log.info("/exam05...........");
+
+		SampleDTO dto = new SampleDTO();
+		dto.setAge(30);
+		dto.setName("홍길동");
+
+		return dto;
+	}
+
+	/**
+	 * ResponseEntity는 개발자가 직접 결과 데이터와 HTTP 상태 코드(200, 404, 500..)를 직접 제어할 수 있는 클래스
+	 */
+	@GetMapping("/exam06")
+	public ResponseEntity<SampleDTO> exam06() {
+		log.info("/exam06...........");
+
+		SampleDTO dto = new SampleDTO();
+		dto.setAge(25);
+		dto.setName("김철수");
+
+		HttpHeaders header = new HttpHeaders();
+		header.add("Content-Type", "application/json;charset=UTF-8");
+
+		return new ResponseEntity<>(dto, header, HttpStatus.OK);
 	}
 }
