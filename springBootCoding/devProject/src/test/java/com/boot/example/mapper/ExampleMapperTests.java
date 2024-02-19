@@ -1,12 +1,8 @@
 package com.boot.example.mapper;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import com.boot.example.domain.BooksVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,37 +14,17 @@ public class ExampleMapperTests {
 	@Autowired
 	private ExampleMapper exampleMapper;
 
-//	@Test
-//	public void testGetTime() {
-//		log.info(exampleMapper.getClass().getName());
-//		log.info("getTime() 메서드 실행");
-//		log.info(exampleMapper.getTime());
-//	}
-//
-//	@Test
-//	public void testGetDate() {
-//		log.info("getDate() 메서드 실행");
-//		log.info(exampleMapper.getDate());
-//	}
-	
 	@Test
-	public void testBookList() {
-		log.info("getBooklist() 메서드 실행");
-		List<BooksVO> list = exampleMapper.getBookList();
-		for(BooksVO vo : list) {
-			log.info(vo.toString());
-		}
-		log.info("레코드 수 : " + list.size());
+	public void testGetTime() {
+		log.info(exampleMapper.getClass().getName());
+		log.info("getTime() 메서드 실행");
+		log.info(exampleMapper.getTime());
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Test
+	public void testGetDate() {
+		log.info("getDate() 메서드 실행");
+		log.info(exampleMapper.getDate());
+	}
+
 }

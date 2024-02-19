@@ -5,26 +5,4 @@
 		select to_char(sysdate,
 		'yyyy-mm-dd hh24:mi:dd') as dateTime from dual
 	</select>
-
-	<select id="getBookList" resultType="BooksVO">
-		SELECT book_id as bookId,
-		title, publisher, year, price
-		FROM books
-		ORDER BY book_id
-	</select>
-
-	<insert id="bookInsert" parameterType="board">
-
-		<selectKey keyProperty="num" resultType="int" order="BEFORE">
-			select
-			board_seq.nextval from dual
-		</selectKey>
-
-		INSERT INTO board(num, title, author, content, repRoot, repStep,
-		repIndent, passwd)
-		VALUES(#{num}, #{title}, #{author}, #{content},
-		#{num}, 0, 0, #{passwd})
-
-	</insert>
-
 </mapper>

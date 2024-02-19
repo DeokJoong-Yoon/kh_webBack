@@ -5,15 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.boot.example.domain.BooksVO;
 import com.boot.example.domain.ExampleVO;
-import com.boot.example.mapper.ExampleMapper;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -76,14 +73,9 @@ public class ExampleController {
 		return map;
 	}
 
-	@Autowired
-	private ExampleMapper exampleMapper;
-
-	@GetMapping(value = "/getBookList", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<BooksVO> getbList() {
-
-		List<BooksVO> list = exampleMapper.getBookList();
-		return list;
-	}
+//	@GetMapping(value = "/getBookList", produces = MediaType.APPLICATION_JSON_VALUE)
+//	public List<BookVO> getbList() {
+//
+//	}
 
 }
