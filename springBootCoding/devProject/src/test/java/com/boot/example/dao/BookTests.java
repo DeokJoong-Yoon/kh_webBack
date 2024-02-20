@@ -1,7 +1,5 @@
 package com.boot.example.dao;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -38,16 +36,23 @@ public class BookTests {
 //		
 //		log.info("적용된 행의 수 : " + bookDAO.bookInsert(bookVO));
 //	}
-	
+
 //	@Test
 //	public void testBookDelete() {
 //		BookVO bookVO = new BookVO();
 //		bookVO.setBookId(1);
 //		log.info("적용된 행의 수 : " + bookDAO.bookDelete(bookVO));
 //	}
-	
-	
+
+	@Test
 	public void testBookUpdate() {
 		BookVO bookVO = new BookVO();
+		bookVO.setTitle("정신분석");
+		bookVO.setPublisher("해악");
+		bookVO.setYear("2402");
+		bookVO.setPrice(12000);
+		bookVO.setBookId(12);
+
+		log.info("적용된 행의 수 : " + bookDAO.bookUpdate(bookVO));
 	}
 }

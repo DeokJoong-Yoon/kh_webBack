@@ -45,24 +45,19 @@ public class BookController {
 		// redirect는 mapping url을 불러온다. -->@GetMapping("/bookList")
 		return "redirect:/book/bookList";
 	}
-	
+
+	@PostMapping("/bookUpdate")
+	public String bookUpdate(@ModelAttribute BookVO bookVO) {
+		bookService.bookUpdate(bookVO);
+		return "redirect:/book/bookList";
+	}
+
 	@GetMapping("/bookDelete")
 	public String bookDelete(BookVO bookVO) {
 		log.info("bookDelete() 메서드 호출");
 		log.info("bookId : " + bookVO.getBookId());
 		bookService.bookDelete(bookVO);
-		
-		return "redirect:/book/bookList";
-	}
-	
-	@GetMapping("/bookUpdate")
-	public String bookUpdateForm(@ModelAttribute BookVO bookVO) {
-		
-		return "redirect:/book/updateForm";
-	}
-	
-	@GetMapping("/bookUpdateForm")
-	public String bookUpdate() {
+
 		return "redirect:/book/bookList";
 	}
 }

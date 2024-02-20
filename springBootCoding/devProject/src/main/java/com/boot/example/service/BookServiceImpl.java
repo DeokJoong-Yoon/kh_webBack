@@ -26,6 +26,12 @@ public class BookServiceImpl implements BookService {
 		int result = bookDAO.bookInsert(bookVO);
 		return result;
 	}
+	
+	@Override
+	public int bookUpdate(BookVO bookVO) {
+		int result = bookDAO.bookUpdate(bookVO);
+		return result;
+	}
 
 	@Override
 	public int bookDelete(BookVO bookVO) {

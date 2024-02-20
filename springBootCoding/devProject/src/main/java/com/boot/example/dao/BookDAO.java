@@ -12,5 +12,7 @@ public interface BookDAO {
 
 	public int bookInsert(BookVO bookVO);
 	
+	public int bookUpdate(BookVO bookVO);
+	
 	public int bookDelete(BookVO bookVO);
 }
