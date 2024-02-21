@@ -1,30 +1,50 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
-<!DOCTYPE html>
 												
-<html>
-	<body>
-	<div><h1>글쓰기</h1></div>
-		<form>
-			<table>
-				<div class="row">
-					<label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">글제목</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control form-control-lg" id="colFormLabelLg" placeholder="제목을 입력하세요.">
-					</div>
-					<label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">작성자</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control form-control-lg" id="colFormLabelLg" placeholder="작성자를 입력하세요.">
-					</div>
-					
-					<div class="mb-10">
-						<label for="colFormLabelLg" class="col-sm-2 col-form-label col-form-label-lg">글내용</label>
-						<textarea class="form-control" id="exampleFormControlTextarea1" rows="10"></textarea>
-					</div>
+<body>
+	<div class="container">
+		<div class="text-center"><h3>게시판 입력화면</h3></div>
+		<form id="f_writeForm">
+			<div class="md-3 row">
+				<label for="boardName" class="col-sm-2 col-form-label">작 성 자</label>
+				<div class="col-sm-10">
+					<input type="text" id="boardName" name="boardName" class="form-control" placeholder="작성자"/>
 				</div>
-			</table>	
+			</div>
+			<div class="md-3 row">
+				<label for="boardTitle" class="col-sm-2 col-form-label">글 제 목</label>
+				<div class="col-sm-10">
+					<input type="text" id="boardTitle" name="boardTitle" class="form-control" placeholder="글제목"/>
+				</div>
+			</div>
+			<div class="md-3 row">
+				<label for="boardContent" class="col-sm-2 col-form-label">글 내 용</label>
+				<div class="col-sm-10">
+					<textarea name="boardContent" id="boardContent" class="form-control" rows="8"></textarea>
+				</div>
+			</div>
+			<div class="md-3 row">
+				<label for="boardPasswd" class="col-sm-2 col-form-label">비밀번호</label>
+				<div class="col-sm-10">
+					<input type="password" id="boardPasswd" name="boardPasswd" class="form-control" placeholder="비밀번호" maxlength="16"/>
+				</div>
+			</div>
 		</form>
-		<script src="/resources/include/js/writeForm.js"></script>
-	</body>
+		<div class="text-end">
+			<button type="button" id="boardInsertBtn" class="btn btn-success">저장</button>
+			<button type="button" id="boardCancelBtn" class="btn btn-success">취소</button>
+			<button type="button" id="boardListBtn" class="btn btn-success">목록</button>
+		</div>
+	</div>
+	<script src="/resources/include/js/writeForm.js"></script>
+	<script>
+	$(function() {
+		let errorMsg = "${errorMsg}";
+		if(errorMsg != "") {
+			alert(errorMsg);
+		}
+	});
+	</script>
+</body>
 </html>

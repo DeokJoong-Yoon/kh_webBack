@@ -1,5 +1,7 @@
 package com.spring.admin.login.service;
 
-public interface AdminLoginService {
+import com.spring.admin.login.vo.AdminLoginVO;
 
+public interface AdminLoginService {
+	public AdminLoginVO loginProcess(AdminLoginVO login);
 }

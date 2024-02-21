@@ -1,22 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/common/common.jspf" %>
-<!DOCTYPE html>
-												
-<html>
-   <body>
-      <div class="container">
-         <div class="text-center"><h3>게시판 리스트</h3></div>
-         
-         <div id="boardList">
+
+<body>
+	<div class="container">
+		<div class="text-center"><h3>게시판 리스트</h3></div>
+		
+		<form id="detailForm">
+			<input type="hidden" id="boardNumber" name="boardNumber" />
+		</form>
+		
+		<div id="boardSearch" class="text-right"></div>
+			<div id="boardList">
                <table summary="게시판 리스트" class="table table-striped">
                   <thead>
                      <tr class="text-center">
-                        <th class="col-md-1">글번호</th>
+                        <th class="col-md-2">글번호</th>
                         <th class="col-md-4">글제목</th>
                         <th class="col-md-2">작성자</th>
-                        <th class="col-md-1">작성일</th>
+                        <th class="col-md-2">작성일</th>
                         <th class="col-md-1">조회수</th>
+                        <!-- <th class="col-md-3">이미지</th> -->
                      </tr>
                   </thead>
                   <tbody id="list">
