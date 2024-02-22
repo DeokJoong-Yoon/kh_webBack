@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ncs.test.member.model.dao.MemberDAO">
+
+	<resultMap type="Member" id="memberResultSet">
+		<id column="member_id" property="memberId" />
+		<result column="member_pwd" property="memberPwd" />
+		<result column="member_nm" property="memberName" />
+	</resultMap>
+
+	<select id="loginMember" parameterType="Member"
+		resultMap="memberResultSet">
+		/* 로그인 처리 쿼리 */
+		SELECT
+		member_id, member_nm, member_enroll_dt
+		FROM member
+		WHERE member_id = #{memberId} and member_pwd =
+		#{memberPwd}
+	</select>
+
+</mapper>

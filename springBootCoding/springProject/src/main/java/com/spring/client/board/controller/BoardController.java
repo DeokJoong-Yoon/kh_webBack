@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.client.board.service.BoardService;
@@ -129,14 +130,92 @@ public class BoardController {
 		model.addAttribute("updateData", updateData);
 		return "client/board/updateForm";
 	}
+	
+	/**
+	 * @param : BoardVO
+	 * 참고 : RedirectAttributes 객체는 리다이렉트 시점(return "redirect:/경로")에
+	 * 한번만 사용되는 데이터를 전송할 수 있는 addFlashAttribute()라는 기능을 지원한다.
+	 * addFlashAttribute() 메서드는 브라우저까지 전송되기는 하지만, URI상에는 보이지 않는 숨겨진 데이터의 형태로 전달된다.
+	 */
+	@PostMapping("/boardUpdate")
+	public String boardUpdate(@ModelAttribute BoardVO bvo) {
+		log.info("boardUpdate 호출 성공");
+		
+		int result = 0;
+		String url = "";
+		
+		result = boardService.boardUpdate(bvo);
+		
+		if(result == 1) {
+			url = "/board/boardDetail?boardNumber=" + bvo.getBoardNumber();
+		} else {
+			url = "/board/updateForm?boardNumber=" + bvo.getBoardNumber();
+		}
+		return "redirect:" + url;
+	}
+	
+	@PostMapping("/boardDelete")
+	public String boardDelete(@ModelAttribute BoardVO bvo, RedirectAttributes ras) {
+		log.info("boardDelete 호출 성공");
+		
+		int result = 0;
+		
+		String url ="";
+		
+		result = boardService.boardDelete(bvo);
+		
+//		result = 0;
+		if(result == 1) {
+			url = "/board/boardList";
+		} else {
+			ras.addFlashAttribute("errorMsg", "삭제에 문제가 있어 다시 진행해 주세요.");
+			url = "/board/boardDetail?boardNumber=" + bvo.getBoardNumber();
+		}
+		return "redirect:" + url;
+	}
+	
+//	@PostMapping(value="/boardDelte")
+//	public String boardDelete(@ModelAttribute BoardVO bvo) { /* throws Exception */
+//		log.info("boardDelete 호출 성공");
+//		boardService.boardDelte(bvo);
+//		return "redirect:/board/boardList";
+//	}
 
 	
+	/**
+	 * 비밀번호 확인
+	 * @param boardNumber : 보인글 여부를 확인할 게시글 번호
+	 * @param boardPasswd : 입력한 비밀번호
+	 * @return int로 result를 0 또는 1를 리턴할 수도 있고,
+	 * 			String를 result 값을 "성공 or 실패, 일치 or 불일치"를 리턴할 수도 있다. (현재 문자열 리턴)
+	 * 참고 : @ResponseBody는 전달된 뷰를 통해서 출력하는 것이 아니라 HTTP Response Body에 직접 출력하는 방식.(ajax 요청시 사용)
+	 * 			produceds 속성은 지정한 미디어 타입과 관련된 응답을 생성하는 실제 컨텐트 타입을 보장.
+	 */
+	@ResponseBody
+	@PostMapping(value="/pwdConfirm", produces = "text/plain; charset=UTF-8")
+	public String pwdConfirm(BoardVO bvo) {
+		log.info("pwdConfirm 호출 성공");
+		
+		// 아래 변수
+		int result = boardService.pwdConfirm(bvo);
+		String value = "";
+		if (result == 1) {
+			value = "일치";
+		} else {
+			value = "불일치";
+		}
+		log.info("result = " + result);
+		return value;	// value 값 자체를 브라우저에 출력
+	}
 	
-	
-	
-	
-	
-	
+	/*
+	@ResponseBody
+	@PostMapping(value="pwdConfirm", produces="text/plain; charset=UTF-8")
+	public String pwdConfirm(BoardVO bvo) {
+		// log.info("pwdConfirm 호출 성공");
+		int result = boardService.pwdConfirm(bvo);
+		return (result == 1) ? "일치" : "불일치";
+	}*/
 	
 	
 	

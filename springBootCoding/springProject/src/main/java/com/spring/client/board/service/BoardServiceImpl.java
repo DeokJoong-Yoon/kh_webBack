@@ -44,12 +44,37 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return detail;
 	}
-
+	
+	
+	// 굴수정 폼 구현
 	@Override
 	public BoardVO updateForm(BoardVO bvo) {
 		BoardVO updateData = null;
 		updateData = boardDao.boardDetail(bvo);
 		return updateData;
+	}
+	
+	// 비밀번호 확인 구현
+	@Override
+	public int pwdConfirm(BoardVO bvo) {
+		int result = 0;
+		result = boardDao.pwdConfirm(bvo);
+		return result;
+	}
+
+	// 글 수정 구현
+	@Override
+	public int boardUpdate(BoardVO bvo) {
+		int result = 0;
+		result = boardDao.boardUpdate(bvo);
+		return result;
+	}
+
+	@Override
+	public int boardDelete(BoardVO bvo) {
+		int result = 0;
+		result = boardDao.boardDelete(bvo);
+		return result;
 	}
 
 }

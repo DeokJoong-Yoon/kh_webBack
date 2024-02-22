@@ -7,7 +7,7 @@
 		<div class="text-center"><h3>게시판 수정화면</h3></div>
 		
 		<%-- post 방식으로 전송 시 반드시 form 태그 추가해 주어야 합니다. --%>
-		<form name="f_data" id="f_data">
+		<form name=f_updateForm id="f_updateForm">
 			<input type="hidden" id="boardNumber" name="boardNumber" value="${updateData.boardNumber}" />
 			
 			<div class="text-center">
@@ -31,7 +31,7 @@
 								<tr>
 									<td>글제목</td>
 									<td class="text-start">
-										<input type="text" name="boardTitle" id="voardTitle" 
+										<input type="text" name="boardTitle" id="boardTitle" 
 										value="${updateData.boardTitle}" class="form-control"/>
 									</td>
 								</tr>
@@ -60,7 +60,7 @@
 		<button type="button" id="boardCancelBtn" class="btn btn-success btn-sm">취소</button>
 		<button type="button" id="boardListBtn" class="btn btn-success btn-sm">목록</button>
 	</div>
-</div>
 	<script src="/resources/include/js/updateForm.js"></script>
+</div>
 </body>
 </html>

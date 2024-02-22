@@ -9,7 +9,7 @@ $(function() {
 				"method" : "post",
 				"action" : "/board/boardUpdate"
 			});
-			$("#f_writeForm").submit();
+			$("#f_updateForm").submit();
 		}
 	});
 	
