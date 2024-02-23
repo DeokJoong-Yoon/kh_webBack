@@ -21,4 +21,39 @@ $(function() {
 		location.href = "/board/writeForm";
 	});
 	
+	/* 입력 양식 enter 제거 */
+	$("#keyword").bind("keydown", function(event) {
+		if (event.keyCode == 13) {
+			event.preventDefault();
+		}
+	});
+	
+	/* 검색 대상이 변경될 때마다 처리 이벤트 */
+	$("#search").on("change", function() {
+		if ($("#search").val() == "all") {
+			$("#keyword").val("전체 목록을 조회합니다.");
+		} else if ($("#search").val() !="all") {
+			$("#keyword").val("");
+			$("#keyword").focus();
+		} 
+	});
+	
+	/* 검색 버튼 클릭 시 처리 이벤트 */
+	$("#searchData").on("click", function() {
+		if ($("#search").val() != "all") {
+			if (!chkData("#keyword", "검색어를")) return;
+		}
+		goPage();
+	});
 });
+
+function goPage() {
+	if ($("#search").val() == "all") {
+		$("#keyword").val("");
+	}
+	$("#f_search").attr({
+		"method" : "get",
+		"action" : "/board/boardList"
+	});
+	$("#f_search").submit();
+}

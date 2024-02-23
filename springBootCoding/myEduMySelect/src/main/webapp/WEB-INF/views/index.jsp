@@ -82,9 +82,24 @@
           <h1>전체 조회 / 빠른검색</h1>
           <h2>여러분의 교육은 여러분이 선택합니다.</h2>
           <div class="d-flex justify-content-center justify-content-lg-start">
-          
-          	<input type="text" class="form-control form-control-lg" placeholder="예)강남구, 강서구"/>
-          	<input type="text" class="form-control form-control-lg" placeholder="예)역삼동, 서초동"/>
+          	<select class="form-control form-control-lg">
+          		<option>구 단위</option>
+          		<option>강남구</option>
+          		<option>송파구</option>
+          		<option>서초구</option>
+          	</select>
+          	<select class="form-control form-control-lg">
+          		<option>동 단위</option>
+          		<option>역삼동</option>
+          		<option>서초동</option>
+          		<option></option>
+          	</select>
+          	<select class="form-control form-control-lg">
+          		<option>과목</option>
+          		<option>수학</option>
+          		<option>과학</option>
+          		<option></option>
+          	</select>
           </div>
           <button type="button" class="btn-get-started scrollto">검색</button>
         </div>
@@ -122,7 +137,7 @@
           <div class="col-xl-4 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
             <div class="icon-box">
               <div class="icon"><i class="bx bx-tachometer"></i></div>
-              <h4><a href="">매칭게시판</a></h4>
+              <h4><a href="">맞춤형검색/매칭게시판</a></h4>
               <p>내가 선택한 교육을 여기서 확인하세요.</p>
             </div>
           </div>
@@ -481,7 +496,7 @@
               <div class="member-info">
                 <h4>윤덕중</h4>
                 <span>CTO(Chief Technology Officer)</span>
-                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+                <p>e</p>
                 <div class="social">
                   <a href=""><i class="ri-twitter-fill"></i></a>
                   <a href=""><i class="ri-facebook-fill"></i></a>

@@ -46,7 +46,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	
-	// 굴수정 폼 구현
+	// 글수정 폼 구현
 	@Override
 	public BoardVO updateForm(BoardVO bvo) {
 		BoardVO updateData = null;

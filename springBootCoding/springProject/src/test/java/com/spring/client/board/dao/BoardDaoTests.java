@@ -1,5 +1,7 @@
 package com.spring.client.board.dao;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -74,7 +76,7 @@ public class BoardDaoTests {
 		log.info("수정된 행의 수 : " + count);
 	}*/
 	
-	@Test
+	/*@Test
 	public void pwdConfirm() {
 		log.info("pwdConfirm 메서드 호출");
 		BoardVO bvo = new BoardVO();
@@ -82,5 +84,19 @@ public class BoardDaoTests {
 		bvo.setBoardPasswd("aetf");
 		int state = boardDao.boardDelete(bvo);
 		log.info("결과 : " + state);
+	}*/
+	
+	@Test
+	public void testBoardList() {
+		BoardVO bvo = new BoardVO();
+		
+		bvo.setSearch("");
+		bvo.setKeyword("");
+		
+		List<BoardVO> list = boardDao.boardList(bvo);
+		for(BoardVO vo : list) {
+			log.info(vo.toString());
+		}
+		log.info("총 레코드 수 : " + boardDao.boardListCnt(bvo));
 	}
 }

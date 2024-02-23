@@ -10,7 +10,29 @@
 			<input type="hidden" id="boardNumber" name="boardNumber" />
 		</form>
 		
-		<div id="boardSearch" class="text-right"></div>
+		<div id="boardSearch" class="text-right">
+			<form id="f_search" name="f_search">
+				<div class="row g-2 align-items-center">
+					<div class="col-auto">
+						<label for="search">검색조건</label>
+					</div>
+					<div class="col-auto">
+						<select id="search" name="search" class="form-select form-select-sm">
+							<option value="all">전체 목록 조회</option>
+							<option value="b_title">글제목</option>
+							<option value="b_content">글내용</option>
+							<option value="b_name">작성자</option>
+						</select>
+					</div>
+					<div class="col-auto">
+						<input type="text" name="keyword" id="keyword" placeholder="검색어를 입력해주세요" class="form-control form-control-sm" />
+					</div>
+					<div class="col-auto">
+						<button type="button" id="searchData" class="btn btn-success btn-sm">검색</button>
+					</div>
+				</div>
+			</form>
+		</div>
 			<div id="boardList">
                <table summary="게시판 리스트" class="table table-striped">
                   <thead>
@@ -52,5 +74,29 @@
       </div>
       
       <script src="/resources/include/js/boardList.js"></script>
+      <script>
+      	$(function() {
+      		/* 검색 후 검색 대상과 검색 단어 출력 */
+      		let word="<c:out value='${boardVO.keyword}' />";
+      		let value ="";
+      		if (word != "") {
+      			$("#keyword").val("<c:out value='${boardVO.keyword}' />");
+      			$("#search").val("<c:out value='${boardVO.search}' />");
+      			
+      			if ($("#search").val() != 'b_content') {
+      				//:contains() 는 특정 텍스트를 포함한 요소 반환
+      				if($("#search").val() == 'b_title') value = "#list tr td.goDetail";
+      				else if ($("#search").val() == 'b_name') value="#list tr td.name";
+      				console.log($(value + ":contains('" + word + "')").html());
+      				// $("#list tr td.goDetail:contains('노력')").html();
+      				// => <span class='required'>노력</span>에 대한 명언
+      				$(value + ":contains('" + word +"')").each(function() {
+      					let regex = new RegExp(word, 'gi');
+      					$(this).html($(this).html().replace(regex, "<span class='required'>" + word + "</span>"));
+      				});
+      			}
+      		}
+      	});
+      </script>
    </body>
 </html>
