@@ -8,8 +8,12 @@
 		<result column="r_name" property="replyName" />
 		<result column="r_content" property="replyContent" />
 		<result column="r_pwd" property="replyPasswd" />
-		<result column="r_date" property="replydDate" />
-
+		<result column="r_date" property="replyDate" />
 	</resultMap>
+	
+	<select id="replyList" parameterType="reply" resultMap="replyMap">
+		SELECT b_num, r_name, r_content, r_pwd, to_char(r_date, 'YYYY-MM-DD') as r_date
+		FROM spring_reply
+	</select>
 
 </mapper>

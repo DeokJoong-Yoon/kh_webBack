@@ -80,13 +80,14 @@ public class DataController {
 		StringBuffer sb = dataService.chungnamDetail(mng_no);
 		return sb.toString();
 	}
-	
+	/*
 	@GetMapping(value="/animalDaejeonView")
 	public String animalDaejeonView() {
 		log.info("대전 유기동물공고 리스트 화면");
 		
 		return "data/animalDaejeonView";	// /WEB-INF/views/data/animalDaejeonView.jsp
 	}
+	
 	
 	@GetMapping("/daejeonTourView")
 	public String daejeonTourView() {
@@ -101,7 +102,7 @@ public class DataController {
 		
 		return "";
 	}
-	
+	*/
 	
 	
 	
