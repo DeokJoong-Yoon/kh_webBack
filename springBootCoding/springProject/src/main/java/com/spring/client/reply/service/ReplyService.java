@@ -1,7 +1,9 @@
 package com.spring.client.reply.service;
 
+import java.util.List;
+
 import com.spring.client.reply.vo.ReplyVO;
 
 public interface ReplyService {
-	public ReplyVO replyList(ReplyVO rvo);
+	public List<ReplyVO> replyList(ReplyVO rvo);
 }

@@ -22,6 +22,7 @@ public class ReplyDaoTests {
 	public void testReplyDaoList() {
 		log.info("ReplyDaoList 테스트 시작");
 		ReplyVO rvo = new ReplyVO();
+		rvo.setBoardNumber(1);
 		List<ReplyVO> list = replyDao.replyList(rvo);
 		for (ReplyVO vo : list) {
 			log.info(vo.toString());
