@@ -13,3 +13,7 @@ textarea {
 	color: red;
 }
 
+#item-template {
+	display : none;
+}
+

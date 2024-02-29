@@ -64,10 +64,11 @@
 							</table>
 						</td>
 					</tr>
-					<jsp:include page="../../board/reply.jsp" />
+					
 				</tbody>
 			</table>
 		</div>
+		<jsp:include page="reply.jsp" />
 	</div>
 	<script src="/resources/include/js/boardDetail.js"></script>
 	<script>
