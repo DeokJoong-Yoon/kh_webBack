@@ -35,12 +35,14 @@
 			</div>
 		</div>
 
+
+
 		<div class="text-center">
 			<table class="table table-bordered">
 				<thead>
 					<tr>
 						<td class="col-3">글번호</td>
-						<td>${detail.boardNumber}(조회수 : ${detail.readcnt})</td>
+						<td>${detail.boardNumber}(조회수: ${detail.readcnt})</td>
 						<td>작성일</td>
 						<td>${detail.boardDate}</td>
 					</tr>
@@ -64,7 +66,7 @@
 							</table>
 						</td>
 					</tr>
-					
+
 				</tbody>
 			</table>
 		</div>
@@ -72,12 +74,12 @@
 	</div>
 	<script src="/resources/include/js/boardDetail.js"></script>
 	<script>
-	$(function() {
-		let errorMsg = "${errorMsg}";
-		if(errorMsg != "") {
-			alert(errorMsg);
-		}
-	});
+		$(function() {
+			let errorMsg = "${errorMsg}";
+			if (errorMsg != "") {
+				alert(errorMsg);
+			}
+		});
 	</script>
 </body>
 </html>

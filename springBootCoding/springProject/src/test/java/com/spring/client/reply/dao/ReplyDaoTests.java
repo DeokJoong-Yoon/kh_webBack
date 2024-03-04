@@ -1,7 +1,5 @@
 package com.spring.client.reply.dao;
 
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,15 +16,23 @@ public class ReplyDaoTests {
 	@Setter(onMethod_ = @Autowired)
 	private ReplyDao replyDao;
 
+	/*
+	 * @Test public void testReplyDaoList() { log.info("ReplyDaoList 테스트 시작");
+	 * ReplyVO rvo = new ReplyVO(); rvo.setBoardNumber(1); List<ReplyVO> list =
+	 * replyDao.replyList(rvo); for (ReplyVO vo : list) { log.info(vo.toString()); }
+	 * log.info("ReplyDaoList 테스트 종료"); }
+	 */
+
 	@Test
-	public void testReplyDaoList() {
-		log.info("ReplyDaoList 테스트 시작");
+	public void testReplyInsert() {
 		ReplyVO rvo = new ReplyVO();
 		rvo.setBoardNumber(1);
-		List<ReplyVO> list = replyDao.replyList(rvo);
-		for (ReplyVO vo : list) {
-			log.info(vo.toString());
-		}
-		log.info("ReplyDaoList 테스트 종료");
+		rvo.setReplyName("Philip");
+		rvo.setReplyContent(
+				"함께 있는 사람보다 학식이 높아 보이지 말라, 당신의 학식을 회중시계 마냥 주머니 속에 감춰라. 단지 시간을 세기 위해 시계를 꺼내지말라. 누군가가 시간을 물어보면 알려줘라. ");
+		rvo.setReplyPasswd("1234");
+		int result = replyDao.replyInsert(rvo);
+
+		log.info("입력결과 : " + result);
 	}
 }

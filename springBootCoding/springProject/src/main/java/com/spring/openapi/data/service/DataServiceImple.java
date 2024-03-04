@@ -1,6 +1,5 @@
 package com.spring.openapi.data.service;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import org.springframework.stereotype.Service;
@@ -123,28 +122,33 @@ public class DataServiceImple implements DataService {
 	public StringBuffer chungnamDetail(String mng_no) throws Exception {
 		// 오픈api주소 :
 		// https://tour.chungnam.go.kr/_prog/openapi/?func=tour&mode=V&mng_no=아이템고유번호
-		/*String site = "https://tour.chungnam.go.kr/_prog/openapi/?func=tour&mode=V&mng_no=" + mng_no;
-		OpenApiDTO openApi = new OpenApiDTO(site, "GET");*/
+		/*
+		 * String site =
+		 * "https://tour.chungnam.go.kr/_prog/openapi/?func=tour&mode=V&mng_no=" +
+		 * mng_no; OpenApiDTO openApi = new OpenApiDTO(site, "GET");
+		 */
 
 		StringBuffer site = new StringBuffer("https://tour.chungnam.go.kr/_prog/openapi/");
 		site.append("?" + URLEncoder.encode("func", "UTF-8") + "=" + URLEncoder.encode("tour", "UTF-8"));
 		site.append("&" + URLEncoder.encode("mode", "UTF-8") + "=" + URLEncoder.encode("V", "UTF-8"));
 		site.append("&" + URLEncoder.encode("mng_no", "UTF-8") + "=" + URLEncoder.encode(mng_no, "UTF-8"));
-		
+
 		OpenApiDTO openApi = new OpenApiDTO(site.toString(), "GET");
 		StringBuffer result = URLConnectUtil.openAPIData(openApi);
 		return result;
 	}
 
 	@Override
-	public StringBuffer animalDaejeonList(AnimalDaejeonDTO animalDaejeonDTO) throws Exception{
+	public StringBuffer animalDaejeonList(AnimalDaejeonDTO animalDaejeonDTO) throws Exception {
 		StringBuffer site = new StringBuffer("http://apis.data.go.kr/6300000/animalDaejeonService/animalDaejeonList");
-		site.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D");
+		site.append("?" + URLEncoder.encode("serviceKey", "UTF-8")
+				+ "=vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D");
 		site.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("1", "UTF-8"));
 		site.append("&" + URLEncoder.encode("numOfOws", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8"));
 		site.append("&" + URLEncoder.encode("searchCondition", "UTF-8") + "=" + animalDaejeonDTO.getSearchCondition());
-		site.append("&" + URLEncoder.encode("searchCondition3", "UTF-8") + "=" + animalDaejeonDTO.getSearchCondition3());
-		
+		site.append(
+				"&" + URLEncoder.encode("searchCondition3", "UTF-8") + "=" + animalDaejeonDTO.getSearchCondition3());
+
 		OpenApiDTO openApi = new OpenApiDTO(site.toString(), "GET");
 		StringBuffer result = URLConnectUtil.openAPIData(openApi);
 		return result;
@@ -153,9 +157,22 @@ public class DataServiceImple implements DataService {
 	@Override
 	public StringBuffer animalDaejeonItem(AnimalDaejeonDTO animalDaejeonDTO) throws Exception {
 		StringBuffer site = new StringBuffer("http://apis.data.go.kr/6300000/animalDaejeonService/animalDaejeonItem");
-		site.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D");
+		site.append("?" + URLEncoder.encode("serviceKey", "UTF-8")
+				+ "=vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D");
 		site.append("&" + URLEncoder.encode("animalSeq", "UTF-8") + "=" + animalDaejeonDTO.getAnimalSeq());
-		
+
+		OpenApiDTO openApi = new OpenApiDTO(site.toString(), "GET");
+		StringBuffer result = URLConnectUtil.openAPIData(openApi);
+		return result;
+	}
+
+	@Override
+	public StringBuffer daejeonTourList() throws Exception {
+		StringBuffer site = new StringBuffer("https://apis.data.go.kr/6300000/openapi2022/tourspot/gettourspot");
+		site.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + "vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D");
+		site.append("&" + URLEncoder.encode("pageNo", "UTF8") + "=" + URLEncoder.encode("1", "UTF-8"));
+		site.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8"));
+
 		OpenApiDTO openApi = new OpenApiDTO(site.toString(), "GET");
 		StringBuffer result = URLConnectUtil.openAPIData(openApi);
 		return result;

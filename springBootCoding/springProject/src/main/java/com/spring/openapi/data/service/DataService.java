@@ -12,4 +12,6 @@ public interface DataService {
 
 	public StringBuffer animalDaejeonItem(AnimalDaejeonDTO animalDaejeonDTO) throws Exception;
 
+	public StringBuffer daejeonTourList() throws Exception;
+
 }

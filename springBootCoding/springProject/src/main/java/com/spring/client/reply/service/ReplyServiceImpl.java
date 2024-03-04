@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Service
 public class ReplyServiceImpl implements ReplyService {
-	
+
 	@Setter(onMethod_ = @Autowired)
 	private ReplyDao replyDao;
 
@@ -21,6 +21,11 @@ public class ReplyServiceImpl implements ReplyService {
 		List<ReplyVO> list = null;
 		list = replyDao.replyList(rvo);
 		return list;
+	}
+
+	@Override
+	public int replyInsert(ReplyVO rvo) {
+		return replyDao.replyInsert(rvo);
 	}
 
 }

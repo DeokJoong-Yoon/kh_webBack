@@ -112,4 +112,20 @@ public class DataController {
 		return sb.toString();
 	}
 
+	@GetMapping(value="/daejeonTourView")
+	public String daejeonTourView() {
+		log.info("대전광역시 문화관광 (관광지) 리스트 화면");
+			
+		return "data/daejeonTourView";
+	}
+	
+	@ResponseBody
+	@GetMapping(value="/daejeonTourList", produces="application/json; charset=UTF-8")
+	public String daejeonTourList() throws Exception {
+		StringBuffer sb = dataService.daejeonTourList();
+		return sb.toString();
+	}
+	
+
+
 }

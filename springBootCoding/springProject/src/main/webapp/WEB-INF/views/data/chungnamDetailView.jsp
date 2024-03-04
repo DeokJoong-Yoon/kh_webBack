@@ -111,7 +111,6 @@
 			contentString += '<h5 class="card-header">' + nm + '</h5>';
 			contentString += '<div class="card-body">';
 			contentString += '	<p class="card-text text-start">주소: ' + addr + '<br />Tel: ' + tel + '</p>';
-			/**/contentString += '<img src="' + view_img[0] + '" style="width:300px;"/>' 
 			contentString += '</div>';
 			contentString += '</div>';
 			
