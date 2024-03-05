@@ -30,8 +30,8 @@
   	<h3>${adminLogin.adminName} 님 환영합니다.</h3>
   	<button type="button" id="logoutBtn" name="logoutBtn">로그아웃</button>
   </c:if>
-  
 </div>
+
 	<script>
 	$(function() {
 		let errorMsg = "${errorMsg}";
