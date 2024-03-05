@@ -105,27 +105,38 @@ public class DataController {
 	}
 
 	@ResponseBody
-	@GetMapping(value="/animalDaejeonItem", produces="application/xml; charset=UTF-8")
+	@GetMapping(value = "/animalDaejeonItem", produces = "application/xml; charset=UTF-8")
 	public String amimalDaejeonItem(AnimalDaejeonDTO animalDaejeonDTO) throws Exception {
 		log.info("유기동물공고현황 상세조회");
 		StringBuffer sb = dataService.animalDaejeonItem(animalDaejeonDTO);
 		return sb.toString();
 	}
 
-	@GetMapping(value="/daejeonTourView")
+	@GetMapping(value = "/daejeonTourView")
 	public String daejeonTourView() {
 		log.info("대전광역시 문화관광 (관광지) 리스트 화면");
-			
+
 		return "data/daejeonTourView";
 	}
-	
+
 	@ResponseBody
-	@GetMapping(value="/daejeonTourList", produces="application/json; charset=UTF-8")
+	@GetMapping(value = "/daejeonTourList", produces = "application/json; charset=UTF-8")
 	public String daejeonTourList() throws Exception {
 		StringBuffer sb = dataService.daejeonTourList();
 		return sb.toString();
 	}
-	
 
+	@GetMapping(value = "/gyeongnammuseumView")
+	public String gyeongnammuseumView() {
+		log.info("경상남도_박물관 정보(JSON) 정보 조회 화면");
+		return "data/gyeongnammuseumView";
+	}
+
+	@ResponseBody
+	@GetMapping(value = "/gyeongnammuseumList", produces = "application/json; charset=UTF-8")
+	public String gyeongnammuseumList() throws Exception {
+		StringBuffer sb = dataService.gyeongnammuseumList();
+		return sb.toString();
+	}
 
 }

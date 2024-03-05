@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -97,4 +99,32 @@ public class ReplyController {
 		result = replyService.replyInsert(rvo);
 		return (result == 1) ? "SUCCESS" : "FAILURE";
 	}
+
+	/**
+	 * 댓글 수정 구현하기
+	 * 
+	 * @return 참고 : REST 방식에서 UPDATE 작업은 PUT, PATCH방식을 이용해서 처리. 전체 데이터를 수정하는 경우에는
+	 *         PUT을 이용하고, 일부의 데이터를 수정하는 경우에는 PATCH를 이용. 현재 요청 URL :
+	 *         http://localhost:8080/replies/댓글번호
+	 */
+	@PutMapping(value = "/{replyNumber}", consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
+	public String replyUpdate(@PathVariable("replyNumber") int replyNumber, @RequestBody ReplyVO rvo) {
+		rvo.setReplyNumber(replyNumber);
+		int result = replyService.replyUpdate(rvo);
+		return (result == 1) ? "SUCCESS" : "FAILURE";
+	}
+
+	/***
+	 * 댓글 삭제 구현하기
+	 * 
+	 * @return 참고 : REST 방식에서 삭제 작업은 DELETE 방식을 이용해서 처리. 현재 요청 URL :
+	 *         http://localhost:8080/replies/댓글번호
+	 */
+	@DeleteMapping(value = "/{replyNumber}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public String replyDelete(@PathVariable("replyNumber") int replyNumber, ReplyVO rvo) {
+		rvo.setReplyNumber(replyNumber);
+		int result = replyService.replyDelete(rvo);
+		return (result == 1) ? "SUCCESS" : "FAILURE";
+	}
+
 }

@@ -23,7 +23,7 @@ public class ReplyDaoTests {
 	 * log.info("ReplyDaoList 테스트 종료"); }
 	 */
 
-	@Test
+	/*@Test
 	public void testReplyInsert() {
 		ReplyVO rvo = new ReplyVO();
 		rvo.setBoardNumber(1);
@@ -34,5 +34,26 @@ public class ReplyDaoTests {
 		int result = replyDao.replyInsert(rvo);
 
 		log.info("입력결과 : " + result);
+	}*/
+	
+	/*@Test
+	public void testReplyDelete() {
+		ReplyVO rvo = new ReplyVO();
+		rvo.setReplyNumber(2);
+		int result = replyDao.replyDelete(rvo);
+		
+		log.info("삭제결과 : " + result);
+	}*/
+	
+	@Test
+	public void testReplyUpdate() {
+		ReplyVO rvo = new ReplyVO();
+		rvo.setReplyContent("타인의 권리를 침해하지 않는 한, 모든 자유는 보장되어야 한다.");
+		rvo.setReplyPasswd("1234");
+		rvo.setReplyName("존 밀");
+		rvo.setReplyNumber(11);
+		int result = replyDao.replyUpdate(rvo);
+		
+		log.info("수정결과 : " + result);
 	}
 }

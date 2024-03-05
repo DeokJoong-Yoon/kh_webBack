@@ -14,4 +14,6 @@ public interface DataService {
 
 	public StringBuffer daejeonTourList() throws Exception;
 
+	public StringBuffer gyeongnammuseumList() throws Exception;
+
 }

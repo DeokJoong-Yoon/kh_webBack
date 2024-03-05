@@ -28,4 +28,18 @@ public class ReplyServiceImpl implements ReplyService {
 		return replyDao.replyInsert(rvo);
 	}
 
+	@Override
+	public int replyUpdate(ReplyVO rvo) {
+		int result = 0;
+		result = replyDao.replyUpdate(rvo);
+		return result;
+	}
+
+	@Override
+	public int replyDelete(ReplyVO rvo) {
+		int result = 0;
+		result = replyDao.replyDelete(rvo);
+		return result;
+	}
+
 }

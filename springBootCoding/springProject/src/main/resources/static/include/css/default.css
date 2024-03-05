@@ -17,3 +17,7 @@ textarea {
 	display : none;
 }
 
+.reply_count {
+	font-size: 15px;
+	color: red;
+}
