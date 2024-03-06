@@ -21,4 +21,6 @@ public class BoardVO extends CommonVO {
 	private String boardPasswd = ""; // 비밀번호
 	private int readcnt = 0; // 조회수
 	private int replyCnt = 0; // 댓글개수
+	
+	private String boardFile = "";
 }

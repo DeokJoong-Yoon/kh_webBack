@@ -13,7 +13,7 @@
 				<div class="col-sm-3">
 					<input type="password" name="replyPasswd" id="replyPasswd" maxlength="18" class="form-control" />
 				</div>
-				<button type="button" id="replyInsertBtn" class="btn btn-primary col-sm-1 sendBtn">저장</button>
+				<button type="button" id="replyInsertBtn" class="btn btn-primary col-sm-1 sendBtn mx-2">저장</button>
 			</div>
 			<div class="row mb-3">
 				<label for="replyContent" class="col-sm-1 col-form-label">댓글내용</label>
@@ -91,6 +91,52 @@
 						}
 					});
 				});
+		
+		/* 비밀번호 확인없이 수정버튼 제어 */
+		$(document).on("click", "button[data-btn='upBtn']", function() {
+			let card = $(this).parents("div.card");
+			let replyNumber = card.attr("data-num");
+			updateForm(replyNumber, card);
+		});
+		
+		/* 수정하기 클릭시 동적으로 생성된 "취소" 버튼 이벤트 처리 */
+		$(document).on("click", ".resetBtn", function() {
+			dataReset();
+		});
+		
+		/** 수정을 위한 Ajax 연동 처리 */
+		$(document).on("click", "#replyUpdateBtn", function() {
+			
+			let replyNumber = $(this).attr("data-rnum");
+			$.ajax({
+				url : '/replies/' + replyNumber,
+				type : 'put',
+				headers : {
+					"Content-Type" : "application/json",
+					"X-HTTP-Method-Override" : "PUT"
+				},
+				data:JSON.stringify({
+					replyContent:$("#replyContent").val(),
+					replyPasswd:$("#replyPasswd").val()
+				}),
+				dataType:'text',
+				error : function(xhr, testStatus, errorThrown) {
+					alert(textStatus + " ( HTTP - " + xhr.status + " / " + errorThrown + ")");
+					//alert("시스템에 문제가 있어 잠시 후 다시 진행해 주세요.");
+				},
+				beforeSend: function() {
+					if (!checkForm("#replyContent", "댓글내용을")) return false;
+				},
+				success:function(result) {
+					console.log("result : " + result);
+					if(result == "SUCCESS") {
+						alert("댓글 수정이 완료되었습니다.");
+						dataReset();
+						listAll(boardNumber);
+					}
+				}
+			});
+		});
 
 		/* 비밀번호 확인없이 삭제버튼 제어 */
 		$(document).on("click", "button[data-btn='delBtn']", function() {
@@ -139,6 +185,32 @@
 		$("#replyForm").each(function() {
 			this.reset();
 		});
+		
+		$("#replyName").prop("readonly", false);
+		$("#replyForm button[type='button']").removeAttr("data-rnum");
+		$("#replyForm button[type='button']").attr("id", "replyInsertBtn");
+		$("#replyForm button[type='button'].sendBtn").html("저장");
+		$("#replyForm button[type='button'].resetBtn").detach();
+	}
+	
+	function updateForm(replyNumber, card) {
+		$("#replyForm .resetBtn").detach();
+		
+		$("#replyName").val(card.find(".card-header .name").html());
+		$("#replyName").prop("readonly", true);
+		
+		let content = card.find(".card-text").html();
+		content = content.replace(/(<br>|<br\/>|<br \/>)/g, '\r\n');
+		$("#replyContent").val(content);
+		
+		$("#replyForm button[type='button']").attr("id", "replyUpdateBtn");
+		$("#replyForm button[type='button']").attr("data-rnum", replyNumber); // 댓글번호 속성 설정
+		$("#replyForm button[type='button']").html("수정");
+		
+		let resetButton = $("<button type='button' class='btn btn-primary col-sm-1 resetBtn'>");
+		resetButton.html("취소");
+		$("#replyForm .sendBtn").after(resetButton);
+		
 	}
 
 	/* 글 삭제를 위한 Ajax 연동 처리*/

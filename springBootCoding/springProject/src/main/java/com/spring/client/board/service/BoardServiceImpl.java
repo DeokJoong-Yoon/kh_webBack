@@ -7,12 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.spring.client.board.dao.BoardDao;
 import com.spring.client.board.vo.BoardVO;
+import com.spring.client.reply.dao.ReplyDao;
+
+import lombok.Setter;
 
 @Service
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired
 	private BoardDao boardDao;
+	
+	@Setter(onMethod_ = @Autowired)
+	private ReplyDao replyDao;
 
 	// 글목록 구현
 	@Override
@@ -74,6 +80,22 @@ public class BoardServiceImpl implements BoardService {
 	public int boardDelete(BoardVO bvo) {
 		int result = 0;
 		result = boardDao.boardDelete(bvo);
+		return result;
+	}
+
+	@Override
+	public int boardListCnt(BoardVO bvo) {
+		return boardDao.boardListCnt(bvo);
+	}
+
+	/**
+	 * 해당 게시물의 댓글 존재 여부 확인
+	 * 댓글이 존재하면 댓글수를 반환하고 존재하지 않으면 0을 반환
+	 */
+	@Override
+	public int replyCount(int boardNumber) {
+		int result = 0;
+		result = replyDao.replyCount(boardNumber);
 		return result;
 	}
 

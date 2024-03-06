@@ -45,7 +45,7 @@ public class ReplyDaoTests {
 		log.info("삭제결과 : " + result);
 	}*/
 	
-	@Test
+	/*@Test
 	public void testReplyUpdate() {
 		ReplyVO rvo = new ReplyVO();
 		rvo.setReplyContent("타인의 권리를 침해하지 않는 한, 모든 자유는 보장되어야 한다.");
@@ -55,5 +55,16 @@ public class ReplyDaoTests {
 		int result = replyDao.replyUpdate(rvo);
 		
 		log.info("수정결과 : " + result);
+	}*/
+	
+	@Test
+	public void testReplyCount() {
+		int boardNumber = 1;
+		int result = replyDao.replyCount(boardNumber);
+		log.info(boardNumber + "번 게시물 댓글 수 : " + result);
+	}
+	
+	public void testReplyChoiceDelete() {
+		
 	}
 }

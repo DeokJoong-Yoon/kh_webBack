@@ -178,6 +178,7 @@ public class DataServiceImple implements DataService {
 		return result;
 	}
 
+	/*
 	@Override
 	public StringBuffer gyeongnammuseumList() throws Exception {
 		StringBuffer site = new StringBuffer("http://apis.data.go.kr/6480000/gyeongnammuseum/gyeongnammuseumList");
@@ -187,6 +188,19 @@ public class DataServiceImple implements DataService {
 		site.append("&" + URLEncoder.encode("resultType", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8"));
 
 		OpenApiDTO openApi = new OpenApiDTO(site.toString(), "GET");
+		StringBuffer result = URLConnectUtil.openAPIData(openApi);
+		return result;
+	}*/
+	
+	@Override
+	public StringBuffer gyeongnammuseumList() throws Exception {
+		String site = "http://apis.data.go.kr/6480000/gyeongnammuseum/gyeongnammuseumList";
+		site +="?serviceKey=" + "vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D";
+		site +="&pageNo=1";
+		site +="&numOfRows=20";
+		site +="&resultType=json";
+		
+		OpenApiDTO openApi = new OpenApiDTO(site, "GET");
 		StringBuffer result = URLConnectUtil.openAPIData(openApi);
 		return result;
 	}
