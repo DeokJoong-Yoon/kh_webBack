@@ -97,7 +97,7 @@ public class BoardController {
 //		return "redirect:" + url;
 //	}
 	@PostMapping("/boardInsert")
-	public String boardInsert(BoardVO bvo, RedirectAttributes ras) {
+	public String boardInsert(BoardVO bvo) throws Exception {
 		log.info("boardInsert 호출 성공");
 		boardService.boardInsert(bvo);
 
@@ -139,9 +139,10 @@ public class BoardController {
 	 *          한번만 사용되는 데이터를 전송할 수 있는 addFlashAttribute()라는 기능을 지원한다.
 	 *          addFlashAttribute() 메서드는 브라우저까지 전송되기는 하지만, URI상에는 보이지 않는 숨겨진 데이터의
 	 *          형태로 전달된다.
+	 * @throws Exception 
 	 */
 	@PostMapping("/boardUpdate")
-	public String boardUpdate(@ModelAttribute BoardVO bvo) {
+	public String boardUpdate(@ModelAttribute BoardVO bvo) throws Exception {
 		log.info("boardUpdate 호출 성공");
 
 		int result = 0;
@@ -158,7 +159,7 @@ public class BoardController {
 	}
 
 	@PostMapping("/boardDelete")
-	public String boardDelete(@ModelAttribute BoardVO bvo, RedirectAttributes ras) {
+	public String boardDelete(@ModelAttribute BoardVO bvo, RedirectAttributes ras) throws Exception {
 		log.info("boardDelete 호출 성공");
 
 		int result = 0;

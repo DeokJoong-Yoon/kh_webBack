@@ -30,6 +30,12 @@
 					<input type="password" id="boardPasswd" name="boardPasswd" class="form-control" placeholder="비밀번호" maxlength="16"/>
 				</div>
 			</div>
+			<div class="md-3 row">
+				<label for="file" class="col-sm-2 col-form-label">첨부파일</label>
+				<div class="col-sm-10">
+					<input type="file" id="file" name="file" class="form-control" />
+				</div>
+			</div>
 		</form>
 		<div class="text-end">
 			<button type="button" id="boardInsertBtn" class="btn btn-success">저장</button>

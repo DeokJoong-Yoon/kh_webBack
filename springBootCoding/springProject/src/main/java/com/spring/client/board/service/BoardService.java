@@ -9,7 +9,7 @@ public interface BoardService {
 
 	public int boardListCnt(BoardVO bvo);
 
-	public int boardInsert(BoardVO bvo);
+	/* public int boardInsert(BoardVO bvo); */
 
 	public BoardVO boardDetail(BoardVO bvo);
 
@@ -17,9 +17,16 @@ public interface BoardService {
 
 	public BoardVO updateForm(BoardVO bvo);
 
-	public int boardUpdate(BoardVO bvo);
+	/* public int boardUpdate(BoardVO bvo); */
 
-	public int boardDelete(BoardVO bvo);
+	/* public int boardDelete(BoardVO bvo); */
 
 	public int replyCount(int boardNumber);
+
+	/* 첨부파일 추가시 */
+	public int boardInsert(BoardVO bvo) throws Exception;
+
+	public int boardUpdate(BoardVO bvo) throws Exception;
+
+	public int boardDelete(BoardVO bvo) throws Exception;
 }

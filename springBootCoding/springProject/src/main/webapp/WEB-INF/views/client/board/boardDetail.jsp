@@ -10,6 +10,7 @@
 		<%-- post 방식으로 전송 시 반드시 form 태그 추가해 주어야 합니다. --%>
 		<form name="f_data" id="f_data">
 			<input type="hidden" name="boardNumber" value="${detail.boardNumber}" />
+			<input type="hidden" name="boardFile" id="boardFile" value="${detail.boardFile}" />
 		</form>
 		<div class="row text-center">
 			<div id="pwdChk" class="col-md-9 text-start">
@@ -59,10 +60,18 @@
 									<td>글제목</td>
 									<td class="text-start">${detail.boardTitle}</td>
 								</tr>
-								<tr>
-									<td>글내용</td>
+								<tr class="content-height">
+									<td class="align-middle">글내용</td>
 									<td class="text-start">${detail.boardContent}</td>
 								</tr>
+								<c:if test="${not empty detail.boardFile}">
+									<tr>
+										<td class="align-middle">이미지</td>
+										<td class="text-start">
+											<img src="/uploadStorage/board/${detail.boardFile}" class="rounded" />
+										</td>
+									</tr>
+								</c:if>
 							</table>
 						</td>
 					</tr>
