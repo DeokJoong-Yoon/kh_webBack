@@ -12,6 +12,9 @@
 		
 		<div id="boardSearch" class="text-right">
 			<form id="f_search" name="f_search">
+				<%-- 페이징 처리를 위한 파라미터 --%>
+				<input type="hidden" name="pageNum" id="pagenum" value="${pageMaker.cvo.pageNum}">
+				<input type="hidden" name="amount" id="amount" value="${pageMaker.cvo.amount}">
 				<div class="row g-2 align-items-center">
 					<div class="col-auto">
 						<label for="search">검색조건</label>
@@ -81,7 +84,34 @@
                   </tbody>   
               </table>   
           </div>
-                    
+
+          <%-- ======================== 페이징 출력 시작 ========================--%>
+          <nav aria-label="Page navigation example">
+			  <ul class="pagination justify-content-center">
+			  <!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인. -->
+			  <c:if test="${pageMaker.prev}">
+			  	<li class="page-item">
+			  		<a href="${pageMaker.startPage - 1}" class="page-link">Previous</a>
+			  		<%-- <a href="${pageMaker.startPage - 10}" class="page-link">Previous</a> --%>
+			  	</li>
+			  </c:if>
+			  
+			  <!-- 바로가기 번호 출력 -->
+			  <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+			  	<li class="page-item ${pageMaker.cvo.pageNum == num ? 'active':''}">
+			  		<a href="${num}" class="page-link">${num}</a>
+			  	</li>
+			  </c:forEach>
+			  <!--  다음 바로가기 10개 존재 여부를 next 필드의 값으로 확인. -->
+			  <c:if test="${pageMaker.next}">
+			  	<li class="page-item">
+			  		<a href="${pageMaker.endPage + 1}" class="page-link">Next</a>
+			  	</li>
+			  </c:if>
+			  
+			  </ul>
+			</nav>
+     
          <div class="text-end">
        		<button type="button" id="insertFormBtn" class="btn btn-success btn-sm">글쓰기</button>
          </div>

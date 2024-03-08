@@ -89,9 +89,11 @@ public class BoardDaoTests {
 	@Test
 	public void testBoardList() {
 		BoardVO bvo = new BoardVO();
+		bvo.setPageNum(1);
+		bvo.setAmount(10);
 		
-		bvo.setSearch("");
-		bvo.setKeyword("");
+		bvo.setSearch("b_title");
+		bvo.setKeyword("순례");
 		
 		List<BoardVO> list = boardDao.boardList(bvo);
 		for(BoardVO vo : list) {

@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.client.board.service.BoardService;
 import com.spring.client.board.vo.BoardVO;
+import com.spring.common.vo.PageDTO;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -30,17 +31,35 @@ public class BoardController {
 
 	/*
 	 * 글목록 구현하기(페이징 처리부분 제외 목록 조회) 요청 URL : http://localhost:8080/board/boardList
+	 * 
+	 * 
+	 * // @RequestMapping(value="/boardList", method = RequestMethod.GET) =>
+	 * // @GetMapping
+	 * 
+	 * @GetMapping("/boardList") public String boardList(@ModelAttribute BoardVO
+	 * bvo, Model model) { log.info("boardList() 메서드 호출"); // 전체 레코드 조회
+	 * List<BoardVO> boardList = boardService.boardList(bvo);
+	 * model.addAttribute("boardList", boardList); return "client/board/boardList";
+	 * // /WEB-INF/views/client/board/boardList.jsp }
 	 */
 
-	// @RequestMapping(value="/boardList", method = RequestMethod.GET) =>
-	// @GetMapping
+	/*
+	 * 글목록 구현하기(페이징 처리부분 제외 목록 조회) 요청 URL : http://localhost:8080/board/boardList
+	 */
+
 	@GetMapping("/boardList")
 	public String boardList(@ModelAttribute BoardVO bvo, Model model) {
 		log.info("boardList() 메서드 호출");
 		// 전체 레코드 조회
 		List<BoardVO> boardList = boardService.boardList(bvo);
 		model.addAttribute("boardList", boardList);
-		return "client/board/boardList"; // /WEB-INF/views/client/board/boardList.jsp
+		
+		// 전체 레코드수 반환.
+		int total = boardService.boardListCnt(bvo);
+		// 페이징 처리
+		model.addAttribute("pageMaker", new PageDTO(bvo, total));
+		// new PageDTO(CommonVO 또는 CommonVO 하위 클래스의 인스턴스(BoardVO), 총 레코드수)
+		return "client/board/boardList"; 
 	}
 
 	/**
@@ -139,7 +158,7 @@ public class BoardController {
 	 *          한번만 사용되는 데이터를 전송할 수 있는 addFlashAttribute()라는 기능을 지원한다.
 	 *          addFlashAttribute() 메서드는 브라우저까지 전송되기는 하지만, URI상에는 보이지 않는 숨겨진 데이터의
 	 *          형태로 전달된다.
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@PostMapping("/boardUpdate")
 	public String boardUpdate(@ModelAttribute BoardVO bvo) throws Exception {
