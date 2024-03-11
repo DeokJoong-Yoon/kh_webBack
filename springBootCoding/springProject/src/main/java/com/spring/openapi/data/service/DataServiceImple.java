@@ -1,6 +1,15 @@
 package com.spring.openapi.data.service;
 
+import java.io.BufferedReader;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -169,7 +178,8 @@ public class DataServiceImple implements DataService {
 	@Override
 	public StringBuffer daejeonTourList() throws Exception {
 		StringBuffer site = new StringBuffer("https://apis.data.go.kr/6300000/openapi2022/tourspot/gettourspot");
-		site.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + "vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D");
+		site.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "="
+				+ "vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D");
 		site.append("&" + URLEncoder.encode("pageNo", "UTF8") + "=" + URLEncoder.encode("1", "UTF-8"));
 		site.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("10", "UTF-8"));
 
@@ -179,29 +189,73 @@ public class DataServiceImple implements DataService {
 	}
 
 	/*
-	@Override
-	public StringBuffer gyeongnammuseumList() throws Exception {
-		StringBuffer site = new StringBuffer("http://apis.data.go.kr/6480000/gyeongnammuseum/gyeongnammuseumList");
-		site.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" + "vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D");
-		site.append("&" + URLEncoder.encode("pageNo", "UTF8") + "=" + URLEncoder.encode("1", "UTF-8"));
-		site.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("20", "UTF-8"));
-		site.append("&" + URLEncoder.encode("resultType", "UTF-8") + "=" + URLEncoder.encode("json", "UTF-8"));
+	 * @Override public StringBuffer gyeongnammuseumList() throws Exception {
+	 * StringBuffer site = new StringBuffer(
+	 * "http://apis.data.go.kr/6480000/gyeongnammuseum/gyeongnammuseumList");
+	 * site.append("?" + URLEncoder.encode("serviceKey", "UTF-8") + "=" +
+	 * "vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D"
+	 * ); site.append("&" + URLEncoder.encode("pageNo", "UTF8") + "=" +
+	 * URLEncoder.encode("1", "UTF-8")); site.append("&" +
+	 * URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("20",
+	 * "UTF-8")); site.append("&" + URLEncoder.encode("resultType", "UTF-8") + "=" +
+	 * URLEncoder.encode("json", "UTF-8"));
+	 * 
+	 * OpenApiDTO openApi = new OpenApiDTO(site.toString(), "GET"); StringBuffer
+	 * result = URLConnectUtil.openAPIData(openApi); return result; }
+	 */
 
-		OpenApiDTO openApi = new OpenApiDTO(site.toString(), "GET");
-		StringBuffer result = URLConnectUtil.openAPIData(openApi);
-		return result;
-	}*/
-	
 	@Override
 	public StringBuffer gyeongnammuseumList() throws Exception {
 		String site = "http://apis.data.go.kr/6480000/gyeongnammuseum/gyeongnammuseumList";
-		site +="?serviceKey=" + "vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D";
-		site +="&pageNo=1";
-		site +="&numOfRows=20";
-		site +="&resultType=json";
-		
+		site += "?serviceKey="
+				+ "vJ94Smv4fFy1pde2ThIEoOJ8XLr8CYxwK98c0ClYxGzcYMHhLRw5wkzXJIMZDpkCcakN4IwLU6EmkzhJ68l4DQ%3D%3D";
+		site += "&pageNo=1";
+		site += "&numOfRows=20";
+		site += "&resultType=json";
+
 		OpenApiDTO openApi = new OpenApiDTO(site, "GET");
 		StringBuffer result = URLConnectUtil.openAPIData(openApi);
 		return result;
+	}
+
+	@Override
+	public List<Map<String, String>> geochanggunPopulationList() throws Exception {
+		BufferedReader br = Files.newBufferedReader(Paths.get("C://opendata//geochanggunPopulationList.csv"));
+
+		String line = "";
+
+		/* 자료를 저장하기 위한 리스트 */
+		List<Map<String, String>> mapList = new ArrayList<Map<String, String>>();
+
+		/* 데이터를 저장하기 위한 리스트 */
+		List<String> dataList = new ArrayList<String>();
+
+		/* 헤더를 저장하기 위한 리스트 */
+		List<String> headerListKor = Arrays.asList(br.readLine().split(","));
+		System.out.println(headerListKor);
+
+		/* 헤더와 매칭되는 영문 데이터를 저장하기 위한 리스트 */
+		List<String> headerListEng = Arrays.asList(new String[] { "eubmyeon", "gagusu", "ingusu", "allmen", "allwomen",
+				"ingusu65", "men65", "women65", "ratio", "basedate" });
+		Map<String, String> headerMap = new HashMap<String, String>();
+
+		for (int i = 0; i < headerListKor.size(); ++i) {
+			headerMap.put(headerListEng.get(i), headerListKor.get(i));
+		}
+		mapList.add(headerMap);
+
+		while ((line = br.readLine()) != null) {
+			String[] dataArray = line.split(",");
+			dataList = Arrays.asList(dataArray);
+
+			/* 헤더를 key, 데이터를 value로 저장하기 위한 맵 */
+			Map<String, String> map = new HashMap<String, String>();
+
+			for (int i = 0; i < headerListEng.size(); ++i) {
+				map.put(headerListEng.get(i), dataList.get(i));
+			}
+			mapList.add(map);
+		}
+		return mapList;
 	}
 }
