@@ -2,8 +2,6 @@
 <%@ include file="/WEB-INF/views/common/common.jspf"%>
 <link rel="stylesheet" type="text/css" href="/resources/include/css/openapi.css" />
 
-</head>
-<body>
 	<div class="container">
 		<div class="text-center">
 			<h3 class="mb-2">대전광역시 문화관광(관광지) 리스트</h3>
