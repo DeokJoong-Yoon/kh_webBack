@@ -17,9 +17,12 @@ $(function() {
 		});
 		$("#detailForm").submit();
 	});
+	
+	
 	$("#insertFormBtn").on("click", () => {
 		location.href = "/board/writeForm";
 	});
+	
 	
 	/* 입력 양식 enter 제거 */
 	$("#keyword").bind("keydown", function(event) {
