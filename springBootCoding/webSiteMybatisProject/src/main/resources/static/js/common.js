@@ -56,3 +56,15 @@ function chkFile(item) {
 		return true;
 	}
 }
+
+const actionProcess = function(form, method, action) {
+	$(form).attr({
+		"method" : method,
+		"action" : action
+	});
+	$(form).submit();
+}
+
+const locationProcess = function(url) {
+	location.href = url;
+}

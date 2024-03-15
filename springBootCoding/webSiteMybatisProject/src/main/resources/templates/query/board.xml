@@ -111,7 +111,7 @@
 		b_num, b_name, b_title,
 		b_content,
 		TO_CHAR(b_date, 'YYYY-MM-DD HH24:MI:SS')
-		AS b_date, readcnt,
+		AS b_date, readcnt
 		FROM spring_board
 		WHERE
 		b_num = #{boardNumber}

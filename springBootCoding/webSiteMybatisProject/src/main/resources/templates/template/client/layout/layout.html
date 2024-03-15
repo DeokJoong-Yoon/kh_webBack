@@ -4,11 +4,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" class="h-100" data-bs-t
 	<head>
 		<th:block th:insert="~{template/client/fragments/block :: config}"></th:block>
 		<link rel="canonical" href="https://getbootstrap.kr/docs/5.3/examples/sticky-footer-navbar/">
+		<link href="/css/sticky-footer-navbar.css" rel="stylesheet">
 	</head>
 	<body class="d-flex flex-column h-100">
 		<!-- 공통 레이아웃 페이지에서 th:insert="~{파일경로 :: fragment명}"으로 명시. 
 		Fragment명을 호출하여 레이아웃을 구성할 수 있다.  -->
-		<header>
+		<header class="mb-auto">
 			<!-- Fixed navbar -->
 			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
 		  		<!-- header 추가 내용 -->
