@@ -3,7 +3,6 @@ package com.spring.client.board.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,12 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.client.board.service.BoardService;
 import com.spring.client.board.vo.BoardVO;
+import com.spring.common.vo.PageDTO;
 
 import lombok.Setter;
 
@@ -45,23 +43,26 @@ public class BoardController {
 	 * 글목록 구현하기(페이징 처리부분 제외 목록 조회) 요청 URL : http://localhost:8080/board/boardList
 	 */
 
+	/*
+	 * @GetMapping("/boardList") public String boardList(@ModelAttribute BoardVO
+	 * bvo, Model model) { List<BoardVO> boardList = boardService.boardList(bvo);
+	 * model.addAttribute("boardList", boardList); return "client/board/boardList";
+	 * }
+	 */
+
 	@GetMapping("/boardList")
-	public String boardList(@ModelAttribute BoardVO bvo, Model model) {
+	public String boardList(@ModelAttribute BoardVO bvo, Model model) { // 전체 레코드 조회
 		List<BoardVO> boardList = boardService.boardList(bvo);
 		model.addAttribute("boardList", boardList);
+
+		// 전체 레코드수 반환.
+		int total = boardService.boardListCnt(bvo);
+		// 페이징 처리
+		model.addAttribute("pageMaker", new PageDTO(bvo, total));
+		// new PageDTO(CommonVO 또는 CommonVO 하위 클래스의 인스턴스(BoardVO), 총 레코드수)
 		return "client/board/boardList";
 	}
 
-	/*
-	 * @GetMapping("/boardList") public String boardList(@ModelAttribute BoardVO
-	 * bvo, Model model) { // 전체 레코드 조회 List<BoardVO> boardList =
-	 * boardService.boardList(bvo); model.addAttribute("boardList", boardList);
-	 * 
-	 * // 전체 레코드수 반환. int total = boardService.boardListCnt(bvo); // 페이징 처리
-	 * model.addAttribute("pageMaker", new PageDTO(bvo, total)); // new
-	 * PageDTO(CommonVO 또는 CommonVO 하위 클래스의 인스턴스(BoardVO), 총 레코드수) return
-	 * "client/board/boardList"; }
-	 */
 	/**
 	 * 글쓰기 폼 출력하기
 	 */
@@ -70,8 +71,6 @@ public class BoardController {
 
 		return "client/board/insertForm";
 	}
-	
-	
 
 //	@PostMapping("/boardInsert")
 //	public String boardInsert(@ModelAttribute BoardVO bvo, Model model) {
@@ -127,7 +126,7 @@ public class BoardController {
 	 * 글 상세보기 구현
 	 */
 	@GetMapping("/{boardNumber}")
-	public String boardDetail(@PathVariable ("boardNumber") int boardNumber, BoardVO boardVO, Model model) {
+	public String boardDetail(@PathVariable("boardNumber") int boardNumber, BoardVO boardVO, Model model) {
 		boardVO.setBoardNumber(boardNumber);
 		BoardVO detail = boardService.boardDetail(boardVO);
 		model.addAttribute("detail", detail);
@@ -197,7 +196,7 @@ public class BoardController {
 	 * "redirect:" + url; }
 	 */
 
-	@PostMapping(value="/boardDelete")
+	@PostMapping(value = "/boardDelete")
 	public String boardDelete(@ModelAttribute BoardVO boardVO) {
 		boardService.boardDelete(boardVO);
 		return "redirect:/board/boardList";
@@ -218,7 +217,7 @@ public class BoardController {
 	@PostMapping(value = "/pwdConfirm", produces = "text/plain; charset=UTF-8")
 	public String pwdConfirm(BoardVO boardVO) {
 		int result = boardService.pwdConfirm(boardVO);
-		return (result==1) ? "일치" : "불일치";
+		return (result == 1) ? "일치" : "불일치";
 	}
 	/*
 	 * @ResponseBody

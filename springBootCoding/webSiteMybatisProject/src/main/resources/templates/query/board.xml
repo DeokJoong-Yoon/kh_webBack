@@ -15,26 +15,18 @@
 
 	</resultMap>
 
-	<select id="boardList" parameterType="board"
-		resultMap="boardMap">
-		SELECT b_num, b_name, b_title, to_char(b_date, 'YYYY-MM-DD')
-		as b_date,
-		readcnt
-		FROM spring_board ORDER BY b_num desc
-	</select>
+	<!-- <select id="boardList" parameterType="board" resultMap="boardMap"> 
+		SELECT b_num, b_name, b_title, to_char(b_date, 'YYYY-MM-DD') as b_date, readcnt 
+		FROM spring_board ORDER BY b_num desc </select> -->
 
-	<!-- 게시판 리스트 기본 조회 --><!-- <select id="boardList" parameterType="board" resultMap="boardMap"> 
+	<!-- 게시판 리스트 기본 조회 -->
+	<!-- <select id="boardList" parameterType="board" resultMap="boardMap"> 
 		SELECT b_num, b_name, b_title, to_char(b_date, 'YYYY-MM-DD') as b_date, readcnt 
 		FROM spring_board <where> <if test="search == 'b_title'"> <![CDATA[ b_title 
 		LIKE '%' || #{keyword} || '%' ]]> </if> <if test="search == 'b_content'"> 
 		<![CDATA[ b_content LIKE '%' || #{keyword} || '%' ]]> </if> <if test="search 
 		== 'b_name'"> <![CDATA[ b_name LIKE '%' || #{keyword} || '%' ]]> </if> </where> 
-		ORDER BY b_num desc </select> <select id="boardListCnt" parameterType="board" 
-		resultType="int"> SELECT count(*) FROM spring_board <where> <if test="search 
-		== 'b_title'"> <![CDATA[ b_title LIKE '%' || #{keyword} || '%' ]]> </if> 
-		<if test="search == 'b_content'"> <![CDATA[ b_content LIKE '%' || #{keyword} 
-		|| '%' ]]> </if> <if test="search == 'b_name'"> <![CDATA[ b_name LIKE '%' 
-		|| #{keyword} || '%' ]]> </if> </where> </select> -->
+		ORDER BY b_num desc </select> -->
 
 	<sql id="boardSearch">
 		<if test="search == 'b_title'">
@@ -45,6 +37,9 @@
 		</if>
 		<if test="search == 'b_name'">
 				<![CDATA[ b_name LIKE '%' || #{keyword} || '%' ]]>
+		</if>
+		<if test="search == 'b_date'">
+				<![CDATA[ b_date LIKE '%' || #{keyword} || '%' ]]>
 		</if>
 	</sql>
 
@@ -67,21 +62,31 @@
 	<!-- 힌트(hint) : 개발자가 데이터베이스에 어떤 방식으로 실행해 줘야 하는지를 명시하기 때문에 강제성을 부여한다. 구문 
 		: /*+로 시작하고 */ 로 종료된다.. /*+ INDEX_DESC(테이블명 인덱스명[기본키 설정시 제약조건명으로 인덱스 자동 생성])*/ -->
 	<!-- rownum : SQL이 실행된 결과에 넘버링해준다. -->
-	<!-- <select id="boardList" parameterType="board" resultMap="boardMap"> 
-		<![CDATA[ SELECT b_num, b_name, b_title, to_char(b_date, 'YYYY-MM-DD') as 
-		b_date, readcnt, b_file, (select count(r_num) from spring_reply where b_num 
-		= boardList.b_num) as r_cnt FROM ( SELECT /*+ INDEX_DESC(spring_board spring_board_pk) 
-		*/ rownum as rnum, b_num, b_name, b_title, b_date, readcnt, b_file FROM spring_board 
-		WHERE ]]> <trim prefix="(" suffix=") AND " prefixOverrides="AND"> <include 
-		refid="boardSearch"></include> </trim> <![CDATA[ rownum <= #{pageNum} * #{amount} 
-		) boardList WHERE rnum > (#{pageNum} - 1 ) * #{amount} ]]> </select> -->
+	<select id="boardList" parameterType="board"
+		resultMap="boardMap"> 
+		<![CDATA[
+		SELECT
+			b_num, b_name, b_title, to_char(b_date, 'YYYY-MM-DD') as b_date, readcnt, b_file, (select count(r_num) from spring_reply where b_num 
+		= boardList.b_num) as r_cnt
+		FROM (
+			SELECT /*+ INDEX_DESC(spring_board spring_board_pk) */
+			rownum as rnum, b_num, b_name, b_title, b_date, readcnt, b_file
+			FROM spring_board 
+		WHERE ]]>
+		<trim prefix="(" suffix=") AND " prefixOverrides="AND">
+			<include refid="boardSearch"></include>
+		</trim>
+		<![CDATA[ rownum <= #{pageNum} * #{amount} 
+		) boardList WHERE rnum > (#{pageNum} - 1 ) * #{amount} ]]>
+	</select>
 
 
 	<!-- 게시물 등록 - 1 -->
 	<insert id="boardInsert" parameterType="board"> INSERT INTO
 		spring_board(b_num, b_name, b_title, b_content, b_pwd) VALUES
 		(spring_board_seq.nextval,
-		#{boardName}, #{boardTitle}, #{boardContent}, #{boardPasswd})
+		#{boardName}, #{boardTitle},
+		#{boardContent}, #{boardPasswd})
 	</insert>
 	<!-- 게시물 등록 - 2 <insert id="boardInsert" parameterType="board"> /* Board 
 		- boardInsert */ <selectKey keyProperty="boardNumber" resultType="int" order="BEFORE"> 
@@ -116,19 +121,10 @@
 		WHERE
 		b_num = #{boardNumber}
 	</select>
-<!-- 	<select id="boardDetail" parameterType="board"
-		resultMap="boardMap">
-		/* Board - boardDetail */
-		SELECT
-		b_num, b_name, b_title,
-		b_content,
-		TO_CHAR(b_date, 'YYYY-MM-DD HH24:MI:SS')
-		AS b_date, readcnt,
-		b_file
-		FROM spring_board
-		WHERE
-		b_num = #{boardNumber}
-	</select> -->
+	<!-- <select id="boardDetail" parameterType="board" resultMap="boardMap"> 
+		/* Board - boardDetail */ SELECT b_num, b_name, b_title, b_content, TO_CHAR(b_date, 
+		'YYYY-MM-DD HH24:MI:SS') AS b_date, readcnt, b_file FROM spring_board WHERE 
+		b_num = #{boardNumber} </select> -->
 
 	<!-- 해당 번호의 비밀번호 확인 -->
 	<select id="pwdConfirm" parameterType="board" resultType="int">
@@ -143,26 +139,21 @@
 	</select>
 
 	<!-- 게시물 수정 -->
-	<update id="boardUpdate" parameterType="board"> /* Board - boardUpdate 
+	<update id="boardUpdate" parameterType="board">
+		/* Board - boardUpdate
+		*/ UPDATE spring_board SET b_title =
+		#{boardTitle}, b_content =
+		#{boardContent},
+		b_date = sysdate
+		<if test="boardPasswd != ''"> , b_pwd = #{boardPasswd} </if>
+		WHERE b_num = #{boardNumber}
+	</update>
+	<!-- 게시물 수정 - 첨부파일 포함 -->
+	<!-- <update id="boardUpdate" parameterType="board"> /* Board - boardUpdate 
 		*/ UPDATE spring_board SET b_title = #{boardTitle}, b_content = #{boardContent}, 
 		b_date = sysdate <if test="boardPasswd != ''"> , b_pwd = #{boardPasswd} </if> 
-		WHERE b_num = #{boardNumber} </update>
-	<!-- 게시물 수정 - 첨부파일 포함 -->
-	<!-- <update id="boardUpdate" parameterType="board">
-		/* Board - boardUpdate */
-		UPDATE spring_board
-		SET b_title =
-		#{boardTitle},
-		b_content = #{boardContent},
-		b_date = sysdate
-		<if test="boardPasswd != ''">
-			, b_pwd = #{boardPasswd}
-		</if>
-		<if test="boardFile !=''">
-			, b_file = #{boardFile}
-		</if>
-		WHERE b_num = #{boardNumber}
-	</update> -->
+		<if test="boardFile !=''"> , b_file = #{boardFile} </if> WHERE b_num = #{boardNumber} 
+		</update> -->
 
 	<delete id="boardDelete" parameterType="board">
 		DELETE FROM
