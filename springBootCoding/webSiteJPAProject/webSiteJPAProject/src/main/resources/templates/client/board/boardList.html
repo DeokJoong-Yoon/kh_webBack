@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{template/client/layout/layout}">
+
+<th:block layout:fragment="content">
+	<div class="text-center">
+		<h3>게시판 리스트</h3>
+	</div>
+
+	<!--/*-->
+	<div id="boardSearch" class="my-2">
+		<form id="searchForm" th:object="${board}">
+			<input type="hidden" name="pageNum" id="pagenum" value="${pageMaker.cvo.pageNum}">
+			<input type="hidden" name="amount" id="amount" value="${pageMaker.cvo.amount}">
+			<div class="row g-2 align-items-center">
+				<div class="col-auto">
+					<label for="search">검색조건</label>
+				</div>
+				<div class="col-auto">
+					<select class="form-select form-select-sm" th:field="*{search}">
+						<option value="b_title">글제목</option>
+						<option value="b_content">글내용</option>
+						<option value="b_name">작성자</option>
+						<option value="b_date">작성일시</option>
+					</select>
+				</div>
+				<div class="col-auto textArea">
+					<input type="text" placeholder="검색어를 입력해주세요" class="form-control form-control-sm" th:field="*{keyword}" />
+				</div>
+				<div class="col-auto dateArea">
+					<input type="date" placeholder="시작일자" class="form-control form-control-sm" th:field="*{startDate}" />
+				</div>
+				<div class="col-auto dateArea">
+					<input type="date" placeholder="종료일자" class="form-control form-control-sm" th:field="*{endDate}" />
+				</div>
+				<div class="col-auto">
+					<button type="button" id="searchBtn" class="btn btn-success btn-sm">Search</button>
+					<button type="button" id="allSearchBtn" class="btn btn-success btn-sm">All Search</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!--*/-->
+	<!-- /* 페이징 처리를 위한 파라미터 */-->
+	
+	<div class="board-table-height">
+		<table class="table table-bordered table-hover">
+			<thead>
+				<tr>
+					<th class="col-md-2">번호</th>
+					<th class="col-md-5">제목</th>
+					<th class="col-md-2">작성자</th>
+					<th class="col-md-3">등록일</th>
+					<th class="col-md-1">조회수</th>
+				</tr>
+			</thead>
+			<tbody class="list">
+				<!-- #lists, #sets, #maps : 컬렉션 관련 기능 제공 -->
+				<tr th:if="${#lists.size(boardList)==0}">
+					<td colspan="5" class="text-center">등록된 게시물이 존재하지 않습니다.</td>
+				</tr>
+				<!-- Strings 객체의 유틸리티 메서드는 #strings다. ex) ${#strings.method(string)} -->
+				<th:block th:if="${not #strings.isEmpty(boardList)}">
+					<tr class="text-center" th:each="board : ${boardList}" th:object="${board}" th:data-no="*{no}">
+						<td th:text="*{no}"></td>
+						<td class="goDetail" th:text="*{title}"></td>
+						<td class="name" th:text="*{name}"></td>
+						<td class="date" th:text="*{#temporals.format(regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+						<td th:text="*{hit}"></td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+		<div class="text-end">
+       		<button type="button" id="insertFormBtn" class="btn btn-success btn-sm">글쓰기</button>
+        </div>
+	</div>
+	<!--/*-->
+	<nav aria-label="Page navigation example">
+		<ul class="pagination justify-content-center">
+			<!-- 이전 바로가기 10개 존재 여부를 prev 필드의 값으로 확인. -->
+			<li class="page-item" th:if="${pageMaker.prev}">
+				<a href="${pageMaker.startPage - 1}" class="page-link">Previous</a>
+			</li>
+
+			<li th:each="num : ${#numbers.sequence(pageMaker.startPage, pageMaker.endPage)}" class="page-item ${pageMaker.cvo.pageNum == num ? 'active':''}">
+				<a th:href="${num}" class="page-link" th:text="${num}"></a>
+			</li>
+			<li class="page-item" th:if="${pageMaker.next}">
+				<a th:href="${pageMaker.endPage + 1}" class="page-link">Next</a>
+			</li>
+
+		</ul>
+	</nav><!--*/-->
+</th:block>
+
+<th:block layout:fragment="script">
+	<script src="/js/jquery-3.7.1.min.js"></script>
+	<script src="/js/common.js"></script>
+	<script src="/js/board/boardList.js"></script>
+</th:block>

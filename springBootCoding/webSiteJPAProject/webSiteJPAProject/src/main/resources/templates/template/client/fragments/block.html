@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- 공통 정보 -->
+<th:block th:fragment="config">
+	<head>
+<script src="/assets/js/color-modes.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>My Site</title>
+
+<link rel="shortcut icon" href="/images/icon.png" />
+<link rel="apple-touch-icon" href="/images/icon.png" />
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" > -->
+<link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="/css/common.css" />
+<!-- Custom styles for this template -->
+
+	</head>
+</th:block>
+
+<!-- 상단 navbar -->
+<th:block th:fragment="header">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="/">Final Project</a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarCollapse">
+			<ul class="navbar-nav me-auto mb-2 mb-md-0">
+				<li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
+				<li class="nav-item"><a class="nav-link" href="/board/boardList">게시판</a></li>
+				<!-- <li class="nav-item">
+               <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+             </li> -->
+			</ul>
+			<!-- <form class="d-flex" role="search">
+             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+             <button class="btn btn-outline-success" type="submit">Search</button>
+           </form> -->
+		</div>
+	</div>
+</th:block>
+
+<!-- footer -->
+<th:block th:fragment="footer">
+	<!-- th:fragment 옵션으로 아래 코드의 Fragment의 이름을 선언해주고 공통 레이아웃에서 해당 Fragment명을 호출하여 해당 코드를 불러올수 있다. -->
+	<div class="container">
+		<span class="text-body-secondary">냉철한 객관성을 소지했는지 여부가 꿈꾸는 공상가와 깨어있는 이상주의자를 구별하게 하는 것이다. - Erich Fromm -</span>
+	</div>
+</th:block>
+
+
+<body>
+</body>
+</html>
